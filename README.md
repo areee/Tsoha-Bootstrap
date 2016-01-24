@@ -7,6 +7,8 @@ Yleisiä linkkejä:
 
 ## Työn aihe
 
-"Joka Kodin Ruokapalvelu":
+Perheille suunnattu "Joka Kodin Ruokapalvelu":
 
-Sovelluksen ideana on yhdistää ruokareseptejä sisältävä sähköinen keittokirja, eli reseptipankki sekä oman kodin jää- ja kuiva-ainekaappien nykyisen ruokatarvetilanteen tietävä sähköinen ruokakomero. Järjestelmän sekä tarkoituksena että tavoitteena on helpottaa kuluttajaa tämän kotona tehtävien ateriakokonaisuuksien suunnittelemisessa ja valmistamisessa sekä auttaa kartoittamaan kotoa löytyvien ruokatarpeiden nykytilanne.
+Sovelluksen ideana on yhdistää ruokareseptejä sisältävä sähköinen keittokirja, eli Reseptipankki sekä oman kodin jää- ja kuiva-ainekaappien nykyisen ruokatarvetilanteen tietävä sähköinen Ruokakomero.
+
+Järjestelmän tarkoituksena on helpottaa kuluttajaa tämän kotiruoan suunnittelemisessa ja valmistamisessa sekä auttaa pysymään tilanteen tasalla kodin ruokatarpeiden kanssa. Järjestelmän tavoitteena on mahdollistaa se, ettei ylimääräistä aikaa kulu kotona laitettavan ruoan suunnitteluun ja raaka-aineiden haalimiseen.
