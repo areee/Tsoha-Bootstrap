@@ -11,7 +11,7 @@ CREATE TABLE RaakaAine(
 	id SERIAL PRIMARY KEY,
 	nimi varchar(50) NOT NULL,
 	maara INTEGER NOT NULL,
-	yksikko NOT NULL,
+	yksikko INTEGER NOT NULL,
 	lisaysPvm DATE,
 	muokkausPvm DATE
 );
@@ -26,12 +26,12 @@ CREATE TABLE Resepti(
 );
 
 CREATE TABLE KayttajaRaakaAine(
-kayttaja_id INTEGER REFERENCES Kayttaja(id)
+kayttaja_id INTEGER REFERENCES Kayttaja(id),
 raakaaine_id INTEGER REFERENCES RaakaAine(id)
 
 );
 
 CREATE TABLE RaakaAineResepti(
-raakaaine_id INTEGER REFERENCES RaakaAine(id)
+raakaaine_id INTEGER REFERENCES RaakaAine(id),
 resepti_id INTEGER REFERENCES Resepti(id)
 );
