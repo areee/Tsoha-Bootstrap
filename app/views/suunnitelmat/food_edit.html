@@ -4,39 +4,39 @@
 
 <form>
     <div class="form-group">
-      <label>Nimi</label>
-      <input type="text" class="form-control" value="Rasvaton maito">
+        <label>Nimi</label>
+        <input type="text" class="form-control" value="Rasvaton maito">
     </div>
-    
+
     <div class="form-group">
-      <label>Määrä</label>
-      <input type="text" class="form-control" value="5">
+        <label>Määrä</label>
+        <input type="number" class="form-control" value="5">
     </div>
-    
+
     <div class="radio">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-    kilogrammaa (kg)
-  </label>
-</div>
-    
-<div class="radio">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-    litraa (l)
-  </label>
-</div>
-    
+        <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1">
+            kilogrammaa (kg)
+        </label>
+    </div>
+
     <div class="radio">
-  <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-    kappaletta (kpl)
-  </label>
-</div>
-    
+        <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2" checked>
+            litraa (l)
+        </label>
+    </div>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
+            kappaletta (kpl)
+        </label>
+    </div>
+
     <div class="form-group">
-      <button type="submit" class="btn btn-primary">Tallenna</button>
+        <button type="submit" class="btn btn-primary">Tallenna</button>
     </div>
-  </form>
+</form>
 
 {% endblock %}

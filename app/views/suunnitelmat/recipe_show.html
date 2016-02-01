@@ -1,53 +1,57 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Reseptipankki</h1>
-  
-  <p>
-      <a href="#" class="btn btn-success">Lisää resepti</a>
-  </p>
+<h1>Makaronilaatikko</h1>
 
-  <form class="form-inline">
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="Hae reseptiä">
-  </div>
-  <button type="submit" class="btn btn-default">Hae</button>
-</form>
-  
-  <table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Valittu</th>
-            <th>Resepti</th>
-            <th>Lisätty</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><input type="checkbox" value=""></td>
-            <td><a href="#">Makaronilaatikko</a></td>
-            <td>15.5.2010</td>
-            <td><a class="btn btn-default btn-sm" href="#">Muokkaa</a></td>
-        </tr>
-        
-        <tr>
-            <td><input type="checkbox" value=""></td>
-            <td><a href="#">Marjarahka</a></td>
-            <td>14.9.2015</td>
-            <td><a class="btn btn-default btn-sm" href="#">Muokkaa</a></td>
-        </tr>
-        
-        <tr>
-            <td><input type="checkbox" value=""></td>
-            <td><a href="#">Smoothie</a></td>
-            <td>1.2.2016</td>
-            <td><a class="btn btn-default btn-sm" href="#">Muokkaa</a></td>
-        </tr>
-    </tbody>
-</table>
-  
-  <p>
-      <a href="#" class="btn btn-primary">Valitse resepti(t)</a>
-  </p>
-  
+<p>
+    <button class="btn btn-danger">Poista</button>
+    <a href="#" class="btn btn-default">Muokkaa</a>
+</p>
+
+<p><strong>Lisäyspäivä: </strong>15.5.2010</p>
+
+<h3>Raaka-aineet</h3>
+
+<dl class="dl-horizontal">
+    <dt></dt>
+    <dd>pippuria</dd>
+    <dt></dt>
+    <dd>suolaa</dd>
+    <dt>1</dt>
+    <dd>sipuli</dd>
+    <dt></dt>
+    <dd>juustoraastetta</dd>
+    <dt>200 g</dt>
+    <dd>jauhelihaa</dd>
+    <dt>150 g</dt>
+    <dd>makaronia</dd>
+    <dt>2</dt>
+    <dd>kananmunaa</dd>
+    <dt>3 dl</dt>
+    <dd>maitoa</dd>
+</dl>
+
+<h3>Ohjeet</h3>
+
+<ol>
+  <li>Pistä makaronit kiehumaan valmiiksi kiehuvaan veteen. Katso keittoaika pussista.</li>
+  <li>Pilko sipuli pieniksi palasiksi.</li>
+  <li>Lämmitä pannu kuumaksi, pistä hieman rypsiöljyä lämmittelemään pannulle ja sipulit perään.</li>
+  <li>Kun sipulit ovat hieman ruskistuneet, kippaa jauhelihat pannuun niiden kaveriksi.</li>
+  <li>Sekoittele jauhelihaa niin, että se hajoaa osiin ja ruskettuu</li>
+  <li>Sekoita joukkoon sopivaksi katsomasi määrä pippuria. Pari ruokalusikallista on aika jees.</li>
+  <li>Pistä lopuksi vielä sekaan hieman suolaa.</li>
+  <li>Kaada lopulta valmis jauheliha-sipuliläjä n. 5-8 senttiä syvään lasivuokaan (matalampikin käy kunhan se on vastaavasti laajempi).</li>
+  <li>Kun makaronit ovat kiehuneet tarpeeksi, sekoita ne jauhelihojen sekaan vuokaan. Varo roiskimasta kaikkia aineksia seinille kulhosta sekoittaessasi.</li>
+  <li>Ota lasi ja riko sinne 2 kananmunaa. Sekoita lopuksi jollakin (esim. haarukalla) kananmunat täysin tasaväriseksi liejuksi.</li>
+  <li>Kaiva jostain tyhjä (puhdas) maitotölkki ja kippaa kananmunavelli sinne.</li>
+  <li>Kaada munien sekaan 3 desilitraa maitoa esim. desimitan avulla.</li>
+  <li>Purista sormilla lujasti tölkki kiinni ja ravista kovaa niin, että kananmuna ja maito sekovat täysin keskenään.</li>
+  <li>Kaada lieju vuokaan niin, että neste ylettyy makaroni-jauhelihan pinnan tasalle.</li>
+  <li>Ripottele päälle juustoraastetta, jos haluat</li>
+  <li>Paista n. 30-45 minuuttia 200-asteisessa uunissa ilman vuoan kantta. Tarkkaile viimeistään 30 minuutin jälkeen ruoan väriä. Jos tuotos on ruskettunut lähinnä pinnalta, mutta pohja on aivan nestemäisen valkoinen, käännä uuni alalämmölle ja paistele niin kauan, että myös vuoan pohjapuolella alkaa näkyä väriä.</li>
+  <li>Mätä naamaan ketsupin kanssa, niin on aika älyttömän hyvää. </li>
+</ol>
+
+<p><strong>Reseptin lähde: </strong><a href="#">http://www.kotikokki.net/reseptit/nayta/137/Makaronilaatikko/</a></p>
+
 {% endblock %}
