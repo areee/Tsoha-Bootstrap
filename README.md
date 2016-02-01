@@ -4,7 +4,7 @@ Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://ylhavuor.users.cs.helsinki.fi/tsoha/)
 * [Linkki dokumentaatiooni](https://github.com/areee/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
-* [Kirjautumissivu](http://ylhavuor.users.cs.helsinki.fi/tsoha/login)
+* [Kirjautumissivu/etusivu](http://ylhavuor.users.cs.helsinki.fi/tsoha/login)
 * [Ruokakomero-sivu](http://ylhavuor.users.cs.helsinki.fi/tsoha/food)
 * [Reseptipankki-sivu](http://ylhavuor.users.cs.helsinki.fi/tsoha/recipe)
 
