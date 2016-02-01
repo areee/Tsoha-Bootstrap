@@ -1,50 +1,17 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Ruokakomero</h1>
+<h1>Rasvaton maito</h1>
 
 <p>
-    <a href="#" class="btn btn-success">Lisää raaka-aine</a>
-    <a href="#" class="btn btn-success">Lisää ostoksia</a>
-</p>
+    <button class="btn btn-danger">Poista</button>
+    <a href="#" class="btn btn-default">Muokkaa</a>
+  </p>
 
-    <form class="form-inline">
-  <div class="form-group">
-    <input type="text" class="form-control" placeholder="Hae raaka-ainetta">
-  </div>
-  <button type="submit" class="btn btn-default">Hae</button>
-</form>
-    
-
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Raaka-aine</th>
-            <th>Määrä</th>
-            <th>Tilanne</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody> 
-        <tr>
-            <td><a href="#">Rasvaton maito</a></td>
-            <td>5</td>
-            <td><label class="label label-success">riittävästi</label></td>
-            <td><a class="btn btn-default btn-sm" href="#">Muokkaa</a></td>
-        </tr>
-        
-        <tr>
-            <td><a href="#">Kaurahiutale</a></td>
-            <td>0,1</td>
-            <td><label class="label label-warning">vähissä</label></td>
-            <td><a class="btn btn-default btn-sm" href="#">Muokkaa</a></td>
-        </tr>
-        
-        <tr>
-            <td><a href="#">Kurkku</a></td>
-            <td>0</td>
-            <td><label class="label label-danger">loppunut</label></td>
-            <td><a class="btn btn-default btn-sm" href="#">Muokkaa</a></td>
-        </tr>
-    </tbody>
-</table>
+  <ul>
+    <li><strong>Määrä</strong> 5</li>
+    <li><strong>Julkaisija:</strong> Bethesda Softworks</li>
+    <li><strong>Tilanne:</strong> <label class="label label-success">riittävästi</label></li>
+    <li><strong>Lisäyspäivä:</strong> 9.12.2014</li>
+  </ul>
+  
 {% endblock %}
