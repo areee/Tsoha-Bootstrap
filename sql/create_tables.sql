@@ -32,5 +32,6 @@ raaka-aine_id INTEGER REFERENCES Raaka-aine(id)
 );
 
 CREATE TABLE Raaka-aine-Resepti(
-
+raaka-aine_id INTEGER REFERENCES Raaka-aine(id)
+resepti_id INTEGER REFERENCES Resepti(id)
 );
