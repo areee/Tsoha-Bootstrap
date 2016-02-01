@@ -3,8 +3,8 @@ CREATE TABLE Kayttaja(
 	id SERIAL PRIMARY KEY,
 	nimi varchar(50) NOT NULL,
 	salasana varchar(50) NOT NULL,
-	yllapito-oikeus boolean default false,
-	lisays-pvm DATE
+	yllapitoOikeus boolean default false,
+	lisaysPvm DATE
 );
 
 CREATE TABLE RaakaAine(
@@ -12,8 +12,8 @@ CREATE TABLE RaakaAine(
 	nimi varchar(50) NOT NULL,
 	maara INTEGER NOT NULL,
 	yksikko NOT NULL,
-	lisays-pvm DATE,
-	muokkaus-pvm DATE
+	lisaysPvm DATE,
+	muokkausPvm DATE
 );
 
 CREATE TABLE Resepti(
@@ -21,17 +21,17 @@ CREATE TABLE Resepti(
 	nimi varchar(50) NOT NULL,
 	ohje varchar(1000) NOT NULL,
 	lahde varchar(50) NOT NULL,
-	lisays-pvm DATE,
-	muokkaus-pvm DATE
+	lisaysPvm DATE,
+	muokkausPvm DATE
 );
 
 CREATE TABLE KayttajaRaakaAine(
 kayttaja_id INTEGER REFERENCES Kayttaja(id)
-raaka-aine_id INTEGER REFERENCES RaakaAine(id)
+raakaaine_id INTEGER REFERENCES RaakaAine(id)
 
 );
 
 CREATE TABLE RaakaAineResepti(
-raaka-aine_id INTEGER REFERENCES RaakaAine(id)
+raakaaine_id INTEGER REFERENCES RaakaAine(id)
 resepti_id INTEGER REFERENCES Resepti(id)
 );
