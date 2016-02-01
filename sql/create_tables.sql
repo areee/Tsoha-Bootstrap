@@ -7,7 +7,7 @@ CREATE TABLE Kayttaja(
 	lisays-pvm DATE
 );
 
-CREATE TABLE Raaka-aine(
+CREATE TABLE RaakaAine(
 	id SERIAL PRIMARY KEY,
 	nimi varchar(50) NOT NULL,
 	maara INTEGER NOT NULL,
@@ -25,13 +25,13 @@ CREATE TABLE Resepti(
 	muokkaus-pvm DATE
 );
 
-CREATE TABLE Kayttaja-Raaka-aine(
+CREATE TABLE KayttajaRaakaAine(
 kayttaja_id INTEGER REFERENCES Kayttaja(id)
-raaka-aine_id INTEGER REFERENCES Raaka-aine(id)
+raaka-aine_id INTEGER REFERENCES RaakaAine(id)
 
 );
 
-CREATE TABLE Raaka-aine-Resepti(
-raaka-aine_id INTEGER REFERENCES Raaka-aine(id)
+CREATE TABLE RaakaAineResepti(
+raaka-aine_id INTEGER REFERENCES RaakaAine(id)
 resepti_id INTEGER REFERENCES Resepti(id)
 );
