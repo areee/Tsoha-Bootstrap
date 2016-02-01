@@ -1,6 +1,38 @@
 {% extends "base.html" %}
 {% block content %}
   <h1>Reseptipankki</h1>
+  
+  <p>
+      <a href="#" class="btn btn-success">Lisää resepti</a>
+  </p>
 
+  <form class="form-inline">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Hae reseptiä">
+  </div>
+  <button type="submit" class="btn btn-default">Hae</button>
+</form>
+  
+  <table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Valittu</th>
+            <th>Resepti</th>
+            <th>Lisätty</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><input type="checkbox" value=""></td>
+            <td>Makaronilaatikko</td>
+            <td>15.5.2010</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" value=""></td>
+            <td>Marjarahka</td>
+            <td>14.9.2015</td>
+        </tr>
+    </tbody>
+</table>
   
 {% endblock %}
