@@ -1,37 +1,43 @@
 -- Lisää CREATE TABLE lauseet tähän tiedostoon
-CREATE TABLE Kayttaja(
+CREATE TABLE Chef(
 	id SERIAL PRIMARY KEY,
-	nimi varchar(50) NOT NULL,
-	salasana varchar(50) NOT NULL,
-	yllapitoOikeus boolean default false,
-	lisaysPvm DATE
+	username varchar(20) NOT NULL,
+	password varchar(20) NOT NULL,
+	is_admin boolean default false NOT NULL,
+	added DATE
+	updated DATE
 );
 
-CREATE TABLE RaakaAine(
+CREATE TABLE Food(
 	id SERIAL PRIMARY KEY,
-	nimi varchar(50) NOT NULL,
-	maara INTEGER NOT NULL,
-	yksikko INTEGER NOT NULL,
-	lisaysPvm DATE,
-	muokkausPvm DATE
+	name varchar(50) NOT NULL,
+	volume INTEGER NOT NULL,
+	unit varchar(20) NOT NULL,
+	added DATE,
+	updated DATE
 );
 
-CREATE TABLE Resepti(
+CREATE TABLE Recipe(
 	id SERIAL PRIMARY KEY,
-	nimi varchar(50) NOT NULL,
-	ohje varchar(1000) NOT NULL,
-	lahde varchar(50) NOT NULL,
-	lisaysPvm DATE,
-	muokkausPvm DATE
+	name varchar(50) NOT NULL,
+	food_id INTEGER REFERENCES Food(id),
+	volume INTEGER,
+	unit varchar(20),
+	instructions varchar(1000) NOT NULL,
+	source varchar(50) NOT NULL,
+	portions INTEGER NOT NULL,
+	added DATE,
+	updated DATE
 );
 
-CREATE TABLE KayttajaRaakaAine(
-kayttaja_id INTEGER REFERENCES Kayttaja(id),
-raakaaine_id INTEGER REFERENCES RaakaAine(id)
+CREATE TABLE ChefFood(
+chef.id INTEGER REFERENCES Chef(id),
+food.id INTEGER REFERENCES Food(id)
 
 );
 
-CREATE TABLE RaakaAineResepti(
-raakaaine_id INTEGER REFERENCES RaakaAine(id),
-resepti_id INTEGER REFERENCES Resepti(id)
+CREATE TABLE ChefRecipe(
+chef.id INTEGER REFERENCES Chef(id),
+recipe.id INTEGER REFERENCES Recipe(id)
+
 );
