@@ -1,6 +1,5 @@
 <?php
 
-require 'app/models/food.php';
 class HelloWorldController extends BaseController {
 
     public static function index() {

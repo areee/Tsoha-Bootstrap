@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Ruokakomero</h1>
+
+<p>
+    <a href="{{base_path}}/food/new" class="btn btn-success">Lisää raaka-aine</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Raaka-aine</th>
+            <th>Määrä</th>
+            <th>Tilanne</th>
+            <th>Muokattu viimeksi</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for food in foods %}
+        <tr>
+            <td><a href="{{base_path}}/food/{{food.id}}">{{food.name}}</td>
+            <td>{{food.volume}} {{food.unit}}</td>
+            <td>
+                {% if food.volume >= 5 %}
+                <label class="label label-success">riittävästi
+                {% elseif food.volume >= 2 %}
+                <label class="label label-warning">vähissä
+                {% else %}
+                <label class="label label-danger">loppunut
+                {% endif %}
+            </td>
+            <td>{{food.updated}}</td>
+            <td><a class="btn btn-default btn-sm" href="{{base_path}}/food/{{food.id}}/edit">Muokkaa</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -13,7 +13,8 @@ $routes->get('/login', function() {
 });
 
 $routes->get('/food', function() {
-    HelloWorldController::food_list();
+//    HelloWorldController::food_list();
+    FoodController::index();
 });
 
 $routes->get('/food/1', function() {
