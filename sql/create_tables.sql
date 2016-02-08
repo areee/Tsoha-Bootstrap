@@ -30,16 +30,19 @@ CREATE TABLE Recipe(
 );
 
 CREATE TABLE ChefFood(
+id SERIAL PRIMARY KEY,
 chef_id INTEGER REFERENCES Chef(id),
 food_id INTEGER REFERENCES Food(id)
 );
 
 CREATE TABLE ChefRecipe(
+id SERIAL PRIMARY KEY,
 chef_id INTEGER REFERENCES Chef(id),
 recipe_id INTEGER REFERENCES Recipe(id)
 );
 
 CREATE TABLE RecipeFood(
+id SERIAL PRIMARY KEY,
 recipe_id INTEGER REFERENCES Recipe(id),
 food_id INTEGER REFERENCES Food(id)
 );
