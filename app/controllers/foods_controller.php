@@ -21,17 +21,16 @@ class FoodController extends BaseController {
             'added' => $params['added'],
             'updated' => $params['updated']
         ));
-        
+
 //        Kint::dump($params);
-        
-        $food ->save();
-        
-        Redirect::to('/food/' . $food -> id, array('message' => 'Raaka-aine on lisätty Ruokakomeroon!'));
+
+        $food->save();
+
+        Redirect::to('/food/' . $food->id, array('message' => 'Raaka-aine on lisätty Ruokakomeroon!'));
     }
 
     public static function create() {
-        $food = Food::find($id);
-        View::make('food/new.html', array('food' => $food));
+        View::make('food/new.html');
     }
 
 }
