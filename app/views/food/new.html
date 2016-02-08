@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Lisää raaka-aine Ruokakomeroon</h1>
+
+<form method="post" action="{{base_path}}/food">
+    
+    <div class="form-group">
+        <label>Nimi</label>
+        <input type="text" name="name" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <label>Määrä</label>
+        <input type="number" name="volume" class="form-control">
+    </div>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa" class="form-control">
+            kilogrammaa (kg)
+        </label>
+    </div>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios2" value="litraa" class="form-control">
+            litraa (l)
+        </label>
+    </div>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios3" value="kappaletta" class="form-control">
+            kappaletta (kpl)
+        </label>
+    </div>
+    
+    <div class="form-group">
+        <label>Lisätty</label>
+        <input type="date" name="added" class="form-control">
+    </div>
+    
+    <div class="form-group">
+        <label>Päivitetty</label>
+        <input type="date" name="updated" class="form-control">
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+</form>
+{% endblock %}

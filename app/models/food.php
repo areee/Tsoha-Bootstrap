@@ -31,8 +31,8 @@ class Food extends BaseModel {
         $query = DB::connection()->prepare('SELECT * FROM Food WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
-        
-        if($row){
+
+        if ($row) {
             $food[] = new Food(array(
                 'id' => $row['id'],
                 'name' => $row['name'],
@@ -44,6 +44,14 @@ class Food extends BaseModel {
             return $food;
         }
         return NULL;
+    }
+
+    public function save() {
+        $query = DB::connection()->prepare('INSERT INTO Food (name,volume,unit,added,updated) VALUES (:name, :volume, :unit, :added, :updated) RETURNING id');
+        $query->execute(array('name' => $this->name, 'volume' => $this->volume, 'unit' => $this->unit, 'added' => $this->added, 'updated' => $this->updated));
+
+        $row = $query->fetch();
+        $this->id = $row['id'];
     }
 
 }

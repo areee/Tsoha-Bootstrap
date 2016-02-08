@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>{{food.name}}</h1>
+
+<p>
+    <!--<a href="#" class="btn btn-default">Poista</a>-->
+    <a href="{{base_path}}/food{{food.id}}/edit" class="btn btn-default">Muokkaa</a>
+</p>
+
+<ul>
+    <li><strong>Määrä: </strong>{{food.volume}} {{food.unit}}</li>
+    <li><strong>Tilanne: </strong>
+        {% if food.volume > 4 %}
+        <label class="label label-success">riittävästi</label>
+        {% elseif food.volume > 1 %}
+        <label class="label label-warning">vähissä</label>
+        {% else %}
+        <label class="label label-danger">loppunut</label>
+        {% endif %}
+    </li>
+    <li><strong>Lisätty: </strong>{{food.added}}</li>
+    <li><strong>Muokattu viimeksi: </strong>{{food.updated}}</li>
+    <li><strong>Lisääjä: </strong>Arttu</li>
+</ul>
+
+{% endblock %}

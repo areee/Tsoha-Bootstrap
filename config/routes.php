@@ -1,7 +1,7 @@
 <?php
 
 $routes->get('/', function() {
-    HelloWorldController::index();
+    FoodController::index();
 });
 
 $routes->get('/hiekkalaatikko', function() {
@@ -13,12 +13,19 @@ $routes->get('/login', function() {
 });
 
 $routes->get('/food', function() {
-//    HelloWorldController::food_list();
     FoodController::index();
 });
 
-$routes->get('/food/1', function() {
-    HelloWorldController::food_show();
+$routes->post('/food', function() {
+    FoodController::store();
+});
+
+$routes->post('/food/new', function() {
+    FoodController::create();
+});
+
+$routes->get('/food/:id', function($id) {
+    FoodController::show($id);
 });
 
 $routes->get('/food/1/edit', function() {

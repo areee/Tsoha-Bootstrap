@@ -16,18 +16,19 @@
             <th></th>
         </tr>
     </thead>
+    
     <tbody>
         {% for food in foods %}
         <tr>
             <td><a href="{{base_path}}/food/{{food.id}}">{{food.name}}</td>
             <td>{{food.volume}} {{food.unit}}</td>
             <td>
-                {% if food.volume >= 5 %}
-                <label class="label label-success">riittävästi
-                {% elseif food.volume >= 2 %}
-                <label class="label label-warning">vähissä
+                {% if food.volume == 0 %}
+                <label class="label label-danger">loppunut</label>
+                {% elseif food.volume > 0 and food.volume < 2 %}
+                <label class="label label-warning">vähissä</label>
                 {% else %}
-                <label class="label label-danger">loppunut
+                <label class="label label-success">riittävästi</label>
                 {% endif %}
             </td>
             <td>{{food.updated}}</td>
