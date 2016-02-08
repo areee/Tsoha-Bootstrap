@@ -1,5 +1,6 @@
 <?php
 
+require 'app/models/food.php';
 class HelloWorldController extends BaseController {
 
     public static function index() {
@@ -10,7 +11,11 @@ class HelloWorldController extends BaseController {
 
     public static function sandbox() {
         // Testaa koodiasi täällä
-        View::make('helloworld.html');
+//        View::make('helloworld.html');
+        $peruna = Food::find(1);
+        $foods = Food::all();
+        Kint::dump($foods);
+        Kint::dump($peruna);   
     }
 
     public static function login() {
