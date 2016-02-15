@@ -6,7 +6,7 @@ class Food extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_volume');
+        $this->validators = array('validate_name', 'validate_volume', 'validate_unit');
     }
 
     public static function all() {
@@ -101,6 +101,14 @@ class Food extends BaseModel {
         $errors = array();
         $validate_number = 'validate_number';
         $errors = $this->{$validate_number}($this->volume);
+        return $errors;
+    }
+
+    public function validate_unit() {
+        $errors = array();
+        if ($this->unit == '' || $this->unit == null) {
+            $errors[] = 'Yksikkö tulee olla valittuna!';
+        }
         return $errors;
     }
 

@@ -20,8 +20,75 @@
 
     <div class="form-group">
         <label class="control-label">Määrä</label>
-        <input type="number" step="any" name="volume" class="form-control">{{attributes.volume}}
+        <input type="number" step="any" name="volume" class="form-control" value="{{attributes.volume}}">
     </div>
+
+    {% if attributes.unit == "kilogrammaa" %}
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa" checked>
+            kilogrammaa (kg)
+        </label>
+    </div>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios2" value="litraa">
+            litraa (l)
+        </label>
+    </div>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios3" value="kappaletta">
+            kappaletta (kpl)
+        </label>
+    </div>
+
+    {% elseif attributes.unit == "litraa" %}
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa">
+            kilogrammaa (kg)
+        </label>
+    </div>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios2" value="litraa" checked>
+            litraa (l)
+        </label>
+    </div>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios3" value="kappaletta">
+            kappaletta (kpl)
+        </label>
+    </div>
+
+    {% elseif attributes.unit == "kappaletta" %}
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa">
+            kilogrammaa (kg)
+        </label>
+    </div>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios2" value="litraa">
+            litraa (l)
+        </label>
+    </div>
+
+    <div class="radio">
+        <label>
+            <input type="radio" name="unit" id="optionsRadios3" value="kappaletta" checked>
+            kappaletta (kpl)
+        </label>
+    </div>
+    {% else %}
 
     <div class="radio">
         <label>
@@ -43,6 +110,9 @@
             kappaletta (kpl)
         </label>
     </div>
+    {% endif %}
+
+
 
     <!--    <div class="form-group">
             <label>Lisätty</label>
