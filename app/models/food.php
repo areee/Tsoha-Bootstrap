@@ -47,10 +47,11 @@ class Food extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Food (name, volume, unit, added, updated) VALUES (:name, :volume, :unit, :added, :updated) RETURNING id');
-        $query->execute(array('name' => $this->name, 'volume' => $this->volume, 'unit' => $this->unit, 'added' => $this->added, 'updated' => $this->updated));
+        $query = DB::connection()->prepare('INSERT INTO Food (name, volume, unit, added, updated) VALUES (:name, :volume, :unit, CURRENT_DATE, CURRENT_DATE) RETURNING id');
+        $query->execute(array('name' => $this->name, 'volume' => $this->volume, 'unit' => $this->unit)); //, 'added' => $this->added, 'updated' => $this->updated
 
         $row = $query->fetch();
+
 //        Kint::trace();
 //        Kint::dump($row);
 

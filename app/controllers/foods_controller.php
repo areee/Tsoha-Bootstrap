@@ -18,8 +18,8 @@ class FoodController extends BaseController {
             'name' => $params['name'],
             'volume' => $params['volume'],
             'unit' => $params['unit'],
-            'added' => $params['added'],
-            'updated' => $params['updated']
+//            'added' => $params['added'],
+//            'updated' => $params['updated']
         ));
 
 //        Kint::dump($params);
