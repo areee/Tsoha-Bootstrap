@@ -48,7 +48,9 @@ class Food extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Food (name, volume, unit, added, updated) VALUES (:name, :volume, :unit, CURRENT_DATE, CURRENT_DATE) RETURNING id');
+        $query = DB::connection()->prepare(
+                'INSERT INTO Food (name, volume, unit, added, updated)'
+                . ' VALUES (:name, :volume, :unit, CURRENT_DATE, CURRENT_DATE) RETURNING id');
         $query->execute(array('name' => $this->name, 'volume' => $this->volume, 'unit' => $this->unit)); //, 'added' => $this->added, 'updated' => $this->updated
 
         $row = $query->fetch();
@@ -57,6 +59,25 @@ class Food extends BaseModel {
 //        Kint::dump($row);
 
         $this->id = $row['id'];
+    }
+
+    public function update() {
+        $query = DB::connection()->prepare('UPDATE Food SET name = :name, volume = :volume, unit = :unit, updated = CURRENT_DATE WHERE id = :id');
+        $query->execute(array('name' => $this->name, 'volume' => $this->volume, 'unit' => $this->unit, 'id' => $this->id)); //, 'added' => $this->added, 'updated' => $this->updated
+        $row = $query->fetch();
+
+//        Kint::dump($row);
+    }
+
+    public function delete() {
+        $query = DB::connection()->prepare('DELETE FROM Food WHERE id = :id');
+        $query->execute(array('id' => $this->id)); //, 'added' => $this->added, 'updated' => $this->updated
+//        $row = $query->fetch();
+//
+////        Kint::trace();
+////        Kint::dump($row);
+//
+//        $this->id = $row['id'];
     }
 
     public function validate_name() {

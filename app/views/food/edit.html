@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Lisää raaka-aine Ruokakomeroon</h1>
+<h1>Muokkaa raaka-ainetta "{{attributes.name}}"</h1>
 
 {% if errors %}
 <div class="alert alert-danger">
@@ -12,7 +12,7 @@
 </div>
 {% endif %}
 
-<form method="post" action="{{base_path}}/food">
+<form method="post" action="{{base_path}}/food/{{attributes.id}}/edit">
     <div class="form-group">
         <label class="control-label">Nimi</label>
         <input type="text" name="name" class="form-control" value="{{attributes.name}}">
@@ -113,20 +113,8 @@
     </div>
     {% endif %}
 
-
-
-    <!--    <div class="form-group">
-            <label>Lisätty</label>
-            <input type="date" name="added" class="form-control">
-        </div>
-    
-        <div class="form-group">
-            <label>Päivitetty</label>
-            <input type="date" name="updated" class="form-control">
-        </div>-->
-
     <div class="form-group">
-        <button type="submit" class="btn btn-primary">Lisää</button>
+        <button type="submit" class="btn btn-primary">Päivitä</button>
     </div>
 </form>
 {% endblock %}

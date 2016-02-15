@@ -45,4 +45,41 @@ class FoodController extends BaseController {
         View::make('food/new.html');
     }
 
+    public static function edit($id) {
+        $food = Food::find($id);
+        View::make('food/edit.html', array('attributes' => $food));
+    }
+
+    public static function update($id) {
+        $params = $_POST;
+
+        $attributes = array(
+            'id' => $id,
+            'name' => $params['name'],
+            'volume' => $params['volume'],
+            'unit' => $params['unit'],
+//            'updated' => $params['updated']
+        );
+
+//        Kint::dump($params);
+
+        $food = new Food($attributes);
+        $errors = $food->errors();
+
+        if (count($errors) > 0) {
+            View::make('food/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+        } else {
+            $food->update();
+
+            Redirect::to('/food/' . $food->id, array('message' => 'Raaka-aine on päivitetty onnistuneesti!'));
+        }
+    }
+
+    public static function destroy($id) {
+        $food = new Food(array('id' => $id));
+        $food->delete();
+
+        Redirect::to('/food', array('message' => 'Raaka-aine on poistettu onnistuneesti!'));
+    }
+
 }

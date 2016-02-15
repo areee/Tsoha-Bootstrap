@@ -20,14 +20,32 @@ $routes->get('/food/:id', function($id) {
     FoodController::show($id);
 });
 
+$routes->get('/food/:id/edit', function($id) {
+    FoodController::edit($id);
+});
+$routes->post('/food/:id/edit', function($id) {
+    FoodController::update($id);
+});
+
+$routes->post('/food/:id/destroy', function($id) {
+    FoodController::destroy($id);
+});
+
+$routes->get('/login', function() {
+    UserController::login();
+});
+
+$routes->post('/login', function() {
+    UserController::handle_login();
+});
+
 $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
 });
 
-$routes->get('/login', function() {
-    HelloWorldController::login();
-});
-
+//$routes->get('/login', function() {
+//    HelloWorldController::login();
+//});
 //$routes->get('/food/1/edit', function() {
 //    HelloWorldController::food_edit();
 //});
