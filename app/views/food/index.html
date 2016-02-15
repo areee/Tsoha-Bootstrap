@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+{% if user_logged_in %}
+<h1>Käyttäjän {{user_logged_in.username}} ruokakomero</h1>
+{% else %}
 <h1>Ruokakomero</h1>
+{% endif %}
+
 
 <p>
     <a href="{{base_path}}/food/new" class="btn btn-success">Lisää raaka-aine</a>

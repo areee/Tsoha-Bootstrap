@@ -32,11 +32,11 @@ $routes->post('/food/:id/destroy', function($id) {
 });
 
 $routes->get('/login', function() {
-    UserController::login();
+    ChefController::login();
 });
 
 $routes->post('/login', function() {
-    UserController::handle_login();
+    ChefController::handle_login();
 });
 
 $routes->get('/hiekkalaatikko', function() {
