@@ -6,6 +6,7 @@ class Food extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+        $this->validators = array('validate_name', 'validate_volume');
     }
 
     public static function all() {
@@ -56,6 +57,46 @@ class Food extends BaseModel {
 //        Kint::dump($row);
 
         $this->id = $row['id'];
+    }
+
+    public function validate_name() {
+        $errors = array();
+        if ($this->name == '' || $this->name == null) {
+            $errors[] = 'Nimi ei saa olla tyhjä!';
+        }
+        if (strlen($this->name) < 3) {
+            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+        }
+        return $errors;
+    }
+
+    public function validate_string_length($string, $length) {
+        $errors = array();
+        if ($string == '' || $string == null) {
+            $errors[] = 'Merkkijono ei saa olla tyhjä!';
+        }
+        if ($length < 3) {
+            $errors[] = 'Merkkijonon pituuden tulee olla vähintään kolme merkkiä!';
+        }
+        return $errors;
+    }
+
+    public function validate_integer($integer) {
+        $errors = array();
+        if ($integer == '' || $integer == null) {
+            $errors[] = 'Kokonaisluku ei saa olla tyhjä!';
+        }
+        if ($integer < 0) {
+            $errors[] = 'Kokonaisluvun tulee olla vähintään nolla!';
+        }
+        return $errors;
+    }
+
+    public function validate_volume() {
+        $errors = array();
+        $validate_integer = 'validate_integer';
+        $errors = $this->{$validate_integer}($this->volume);
+        return $errors;
     }
 
 }
