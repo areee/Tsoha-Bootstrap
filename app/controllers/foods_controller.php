@@ -14,19 +14,31 @@ class FoodController extends BaseController {
 
     public static function store() {
         $params = $_POST;
-        $food = new Food(array(
+        $attributes = array(
             'name' => $params['name'],
             'volume' => $params['volume'],
-            'unit' => $params['unit'],
-//            'added' => $params['added'],
-//            'updated' => $params['updated']
-        ));
+            'unit' => $params['unit']
+        );
 
+//        $food = new Food(array(
+//            'name' => $params['name'],
+//            'volume' => $params['volume'],
+//            'unit' => $params['unit'],
+////            'added' => $params['added'],
+////            'updated' => $params['updated']
+//        ));
 //        Kint::dump($params);
 
-        $food->save();
+        $food = new Food($attributes);
+        $errors = $food->errors();
 
-        Redirect::to('/food/' . $food->id, array('message' => 'Raaka-aine on lisätty Ruokakomeroon!'));
+        if (count($errors) == 0) {
+            $food->save();
+
+            Redirect::to('/food/' . $food->id, array('message' => 'Raaka-aine on lisätty Ruokakomeroon!'));
+        } else {
+            View::make('food/new.html', array('errors' => $errors, 'attributes' => $attributes));
+        }
     }
 
     public static function create() {

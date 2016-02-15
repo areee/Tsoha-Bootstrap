@@ -81,21 +81,26 @@ class Food extends BaseModel {
         return $errors;
     }
 
-    public function validate_integer($integer) {
+    public function validate_number($number) {
         $errors = array();
-        if ($integer == '' || $integer == null) {
-            $errors[] = 'Kokonaisluku ei saa olla tyhjä!';
+        if ($number == '' || $number == null) {
+            $errors[] = 'Määrä ei saa olla tyhjä!';
         }
-        if ($integer < 0) {
-            $errors[] = 'Kokonaisluvun tulee olla vähintään nolla!';
+
+        if (!is_numeric($number)) {
+            $errors[] = 'Määrän tulee olla numero!';
+        }
+
+        if ($number < 0) {
+            $errors[] = 'Määrän tulee olla vähintään nolla!';
         }
         return $errors;
     }
 
     public function validate_volume() {
         $errors = array();
-        $validate_integer = 'validate_integer';
-        $errors = $this->{$validate_integer}($this->volume);
+        $validate_number = 'validate_number';
+        $errors = $this->{$validate_number}($this->volume);
         return $errors;
     }
 

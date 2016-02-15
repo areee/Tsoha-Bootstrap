@@ -17,7 +17,7 @@ class HelloWorldController extends BaseController {
 //        Kint::dump($maito);   
         $food = new Food(array(
             'name' => 'd',
-            'volume' => '-1',
+            'volume' => 'as',
 //            'unit' => 'kilogrammaa'
         ));
 
