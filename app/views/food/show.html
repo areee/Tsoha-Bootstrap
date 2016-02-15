@@ -15,12 +15,12 @@
 <ul>
     <li><strong>Määrä: </strong>{{food.volume}} {{food.unit}}</li>
     <li><strong>Tilanne: </strong>
-        {% if food.volume > 4 %}
-        <label class="label label-success">riittävästi</label>
-        {% elseif food.volume > 1 %}
+        {% if food.volume == 0 %}
+        <label class="label label-danger">loppunut</label>
+        {% elseif food.volume > 0 and food.volume < 2 %}
         <label class="label label-warning">vähissä</label>
         {% else %}
-        <label class="label label-danger">loppunut</label>
+        <label class="label label-success">riittävästi</label>
         {% endif %}
     </li>
     <li><strong>Lisätty: </strong>{{food.added}}</li>
