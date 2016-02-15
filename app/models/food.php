@@ -33,7 +33,7 @@ class Food extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $food[] = new Food(array(
+            $food = new Food(array(
                 'id' => $row['id'],
                 'name' => $row['name'],
                 'volume' => $row['volume'],
