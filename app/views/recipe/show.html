@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
+{% import "macros/forms.html" as forms %}
+<h1>Reseptin "{{recipe.name}}" tiedot</h1>
+
+<p>
+    {{forms.destroy_button("#{base_path}/recipe/#{recipe.id}/destroy")}}
+    <a href="{{base_path}}/recipe/{{recipe.id}}/edit" class="btn btn-default">Muokkaa</a>
+</p>
+
+<p><strong>Annoskoko: </strong>{{recipe.portions}}</p>
+<p><strong>Lisääjä: </strong>{{user_logged_in.username}}</p>
+<p><strong>Lisätty: </strong>{{recipe.added}}</p>
+<p><strong>Muokattu viimeksi: </strong>{{recipe.updated}}</p>
+<p><strong>Reseptin lähde: </strong>{{recipe.source}}</p>
+
+<h3>Raaka-aineet</h3>
+
+<!--tämä toiminto vielä pahasti kesken-->
+<p>
+    {{recipe.volume}}
+    {{recipe.unit}}
+</p>
+
+<!--{% for volume in recipe.volume %}-->
+<!--{% for unit in recipe.unit %}-->
+<!--<ul class="list-inline">
+    <li>{{volume}}</li>
+</ul>
+{% endfor %}-->
+<!--{% endfor %}-->
+
+
+
+<h3>Ohjeet</h3>
+
+<p>
+    {{recipe.instructions}}
+</p>
+
+{% endblock %}

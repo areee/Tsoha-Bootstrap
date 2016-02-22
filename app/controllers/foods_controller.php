@@ -24,15 +24,6 @@ class FoodController extends BaseController {
             'unit' => $params['unit']
         );
 
-//        $food = new Food(array(
-//            'name' => $params['name'],
-//            'volume' => $params['volume'],
-//            'unit' => $params['unit'],
-////            'added' => $params['added'],
-////            'updated' => $params['updated']
-//        ));
-//        Kint::dump($params);
-
         $food = new Food($attributes);
         $errors = $food->errors();
 
@@ -67,11 +58,8 @@ class FoodController extends BaseController {
             'id' => $id,
             'name' => $params['name'],
             'volume' => $params['volume'],
-            'unit' => $params['unit'],
-//            'updated' => $params['updated']
+            'unit' => $params['unit']
         );
-
-//        Kint::dump($params);
 
         $food = new Food($attributes);
         $errors = $food->errors();

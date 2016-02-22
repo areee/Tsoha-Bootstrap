@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
+
+{% if user_logged_in %}
+<h1>Käyttäjän {{user_logged_in.username}} reseptipankki</h1>
+{% else %}
+<h1>Reseptipankki</h1>
+{% endif %}
+
+<p>
+    <a href="{{base_path}}/recipe/new" class="btn btn-success">Lisää resepti</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <!--<th>Valittu</th>-->
+            <th>Resepti</th>
+            <th>Annoskoko</th>
+            <th>Valmistustilanne</th>
+            <th>Muokattu viimeksi</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for recipe in recipes %}
+        <tr>
+            <!--<td><input type="checkbox" value=""></td>--><!--tämä toiminto vielä pahasti kesken-->
+            <td><a href="{{base_path}}/recipe/{{recipe.id}}">{{recipe.name}}</a></td>
+            <td>{{recipe.portions}}</td>
+            <td><label class="label label-success">onnistuu</label></td> <!--tämä toiminto vielä pahasti kesken-->
+            <td>{{recipe.updated}}</td>
+            <td><a class="btn btn-default btn-sm" href="{{base_path}}/recipe/{{recipe.id}}/edit">Muokkaa</a></td>
+            <!--tämä toiminto vielä pahasti kesken-->
+            <!--<td><label class="label label-warning">nippa-nappa</label></td>
+            <td><label class="label label-danger">ei onnistu</label></td>-->
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<!--tämä toiminto vielä pahasti kesken-->
+<!--<p>
+    <a href="#" class="btn btn-primary">Valitse resepti(t)</a>
+</p>-->
+
+{% endblock %}

@@ -6,7 +6,8 @@ class Food extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_volume', 'validate_unit');
+        $this->validators = array('validate_name',
+            'validate_volume', 'validate_unit');
     }
 
     public static function all() {
@@ -29,7 +30,8 @@ class Food extends BaseModel {
     }
 
     public static function find($id) {
-        $query = DB::connection()->prepare('SELECT * FROM Food WHERE id = :id LIMIT 1');
+        $query = DB::connection()->prepare(
+                'SELECT * FROM Food WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
 
@@ -50,46 +52,35 @@ class Food extends BaseModel {
     public function save() {
         $query = DB::connection()->prepare(
                 'INSERT INTO Food (name, volume, unit, added, updated)'
-                . ' VALUES (:name, :volume, :unit, CURRENT_DATE, CURRENT_DATE) RETURNING id');
-        $query->execute(array('name' => $this->name, 'volume' => $this->volume, 'unit' => $this->unit)); //, 'added' => $this->added, 'updated' => $this->updated
+                . ' VALUES (:name, :volume, :unit, CURRENT_DATE, CURRENT_DATE)'
+                . ' RETURNING id');
+        $query->execute(array('name' => $this->name, 'volume' => $this->volume,
+            'unit' => $this->unit));
 
         $row = $query->fetch();
-
-//        Kint::trace();
-//        Kint::dump($row);
 
         $this->id = $row['id'];
     }
 
     public function update() {
-        $query = DB::connection()->prepare('UPDATE Food SET name = :name, volume = :volume, unit = :unit, updated = CURRENT_DATE WHERE id = :id');
-        $query->execute(array('name' => $this->name, 'volume' => $this->volume, 'unit' => $this->unit, 'id' => $this->id)); //, 'added' => $this->added, 'updated' => $this->updated
+        $query = DB::connection()->prepare(
+                'UPDATE Food SET name = :name, volume = :volume, unit = :unit,'
+                . ' updated = CURRENT_DATE WHERE id = :id');
+        $query->execute(array('name' => $this->name, 'volume' => $this->volume,
+            'unit' => $this->unit, 'id' => $this->id));
         $row = $query->fetch();
-
-//        Kint::dump($row);
     }
 
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Food WHERE id = :id');
-        $query->execute(array('id' => $this->id)); //, 'added' => $this->added, 'updated' => $this->updated
-//        $row = $query->fetch();
-//
-////        Kint::trace();
-////        Kint::dump($row);
-//
-//        $this->id = $row['id'];
+        $query->execute(array('id' => $this->id));
     }
 
     public function validate_name() {
         $errors = array();
         $validate_string_length = 'validate_string_length';
-        $errors = $this->{$validate_string_length}($this->name, strlen($this->name));
-//        if ($this->name == '' || $this->name == null) {
-//            $errors[] = 'Nimi ei saa olla tyhjä!';
-//        }
-//        if (strlen($this->name) < 3) {
-//            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
-//        }
+        $errors = $this->{$validate_string_length}
+                ($this->name, strlen($this->name));
         return $errors;
     }
 
@@ -99,7 +90,8 @@ class Food extends BaseModel {
             $errors[] = 'Merkkijono ei saa olla tyhjä!';
         }
         if ($length < 3) {
-            $errors[] = 'Merkkijonon "' . $string . '" pituuden tulee olla vähintään kolme merkkiä!';
+            $errors[] = 'Merkkijonon "' . $string .
+                    '" pituuden tulee olla vähintään kolme merkkiä!';
         }
         return $errors;
     }
@@ -127,6 +119,7 @@ class Food extends BaseModel {
         return $errors;
     }
 
+    // toistaiseksi tarpeeton:
     public function validate_unit() {
         $errors = array();
         if ($this->unit == '' || $this->unit == null) {

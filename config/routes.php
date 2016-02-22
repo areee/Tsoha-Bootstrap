@@ -1,13 +1,11 @@
 <?php
 
-//function check_logged_in() {
-//    BaseController::check_logged_in();
-//}
-
+// juuri/etusivu:
 $routes->get('/', function() {
     FoodController::index();
 });
 
+// ruokakomeron toiminnot:
 $routes->get('/food', function() {
     FoodController::index();
 });
@@ -35,6 +33,7 @@ $routes->post('/food/:id/destroy', function($id) {
     FoodController::destroy($id);
 });
 
+// käyttäjätoiminnot:
 $routes->get('/login', function() {
     ChefController::login();
 });
@@ -47,25 +46,35 @@ $routes->post('/logout', function() {
     ChefController::logout();
 });
 
+// reseptipankin toiminnot:
+$routes->get('/recipe', function() {
+    RecipeController::index();
+});
+
+$routes->post('/recipe', function() {
+    RecipeController::store();
+});
+
+$routes->get('/recipe/new', function() {
+    RecipeController::create();
+});
+
+$routes->get('/recipe/:id', function($id) {
+    RecipeController::show($id);
+});
+
+$routes->get('/recipe/:id/edit', function($id) {
+    RecipeController::edit($id);
+});
+$routes->post('/recipe/:id/edit', function($id) {
+    RecipeController::update($id);
+});
+
+$routes->post('/recipe/:id/destroy', function($id) {
+    RecipeController::destroy($id);
+});
+
+// hiekkalaatikko testausta varten:
 $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
-});
-
-//$routes->get('/login', function() {
-//    HelloWorldController::login();
-//});
-//$routes->get('/food/1/edit', function() {
-//    HelloWorldController::food_edit();
-//});
-
-$routes->get('/recipe', function() {
-    HelloWorldController::recipe_list();
-});
-
-$routes->get('/recipe/1', function() {
-    HelloWorldController::recipe_show();
-});
-
-$routes->get('/recipe/1/edit', function() {
-    HelloWorldController::recipe_edit();
 });
