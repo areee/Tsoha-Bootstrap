@@ -1,6 +1,6 @@
 # Tietokantasovelluksen esittelysivu
 
-## Yleisiä linkkejä:
+## Yleisiä linkkejä
 
 * [Linkki sovellukseeni](http://ylhavuor.users.cs.helsinki.fi/tsoha/)
 * [Linkki dokumentaatiooni](https://github.com/areee/Tsoha-Bootstrap/blob/master/doc/dokumentaatio.pdf)
