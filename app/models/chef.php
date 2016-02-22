@@ -8,7 +8,7 @@ class Chef extends BaseModel {
         parent::__construct($attributes);
     }
 
-    public static function authenticate() {
+    public static function authenticate($username, $password) {
         $query = DB::connection()->prepare('SELECT * FROM Chef WHERE username = :username AND password = :password LIMIT 1');
         $query->execute(array('username' => $username, 'password' => $password));
         $row = $query->fetch();
@@ -34,7 +34,7 @@ class Chef extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $chef = new User(array(
+            $chef = new Chef(array(
                 'id' => $row['id'],
                 'username' => $row['username'],
                 'password' => $row['password'],

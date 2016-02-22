@@ -15,9 +15,9 @@ class ChefController extends BaseController {
             View::make('chef/login.html', array('error' => 'Väärä käyttäjätunnus'
                 . ' tai salasana!', 'username' => $params['username']));
         } else {
-            $_SESSION['user'] = $chef->id;
+            $_SESSION['chef'] = $chef->id;
 
-            Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $chef->name . '!'));
+            Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $chef->username . '!'));
         }
     }
 

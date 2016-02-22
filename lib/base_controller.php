@@ -5,14 +5,14 @@ class BaseController {
     public static function get_user_logged_in() {
         // Toteuta kirjautuneen käyttäjän haku tähän
         // Katsotaan onko user-avain sessiossa
-        if (isset($_SESSION['user'])) {
-            $user_id = $_SESSION['user'];
+        if (isset($_SESSION['chef'])) {
+            $chef_id = $_SESSION['chef'];
             // Pyydetään User-mallilta käyttäjä session mukaisella id:llä
-            $user = Chef::find($user_id);
+            $chef = Chef::find($chef_id);
 
-            return $user;
+            return $chef;
         }
-
+        // Käyttäjä ei ole kirjautunut sisään
         return null;
     }
 
