@@ -82,12 +82,14 @@ class Food extends BaseModel {
 
     public function validate_name() {
         $errors = array();
-        if ($this->name == '' || $this->name == null) {
-            $errors[] = 'Nimi ei saa olla tyhjä!';
-        }
-        if (strlen($this->name) < 3) {
-            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
-        }
+        $validate_string_length = 'validate_string_length';
+        $errors = $this->{$validate_string_length}($this->name, strlen($this->name));
+//        if ($this->name == '' || $this->name == null) {
+//            $errors[] = 'Nimi ei saa olla tyhjä!';
+//        }
+//        if (strlen($this->name) < 3) {
+//            $errors[] = 'Nimen pituuden tulee olla vähintään kolme merkkiä!';
+//        }
         return $errors;
     }
 
@@ -97,7 +99,7 @@ class Food extends BaseModel {
             $errors[] = 'Merkkijono ei saa olla tyhjä!';
         }
         if ($length < 3) {
-            $errors[] = 'Merkkijonon pituuden tulee olla vähintään kolme merkkiä!';
+            $errors[] = 'Merkkijonon "' . $string . '" pituuden tulee olla vähintään kolme merkkiä!';
         }
         return $errors;
     }

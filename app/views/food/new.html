@@ -18,10 +18,34 @@
         <input type="text" name="name" class="form-control" value="{{attributes.name}}">
     </div>
 
+    {% if attributes.unit == "kilogrammaa" %}
     <div class="form-group">
         <label class="control-label">Määrä</label>
-        <input type="number" step="any" name="volume" class="form-control" value="{{attributes.volume}}">
+        <input type="number" min="0" step="0.001" name="volume" class="form-control" value="{{attributes.volume}}">
     </div>
+
+    {% elseif attributes.unit == "litraa" %}
+
+    <div class="form-group">
+        <label class="control-label">Määrä</label>
+        <input type="number" min="0" step="0.25" name="volume" class="form-control" value="{{attributes.volume}}">
+    </div>
+
+    {% elseif attributes.unit == "kappaletta" %}
+
+    <div class="form-group">
+        <label class="control-label">Määrä</label>
+        <input type="number"  min="0" step="0.5" name="volume" class="form-control" value="{{attributes.volume}}">
+    </div>
+
+    {% else %}
+
+    <div class="form-group">
+        <label class="control-label">Määrä</label>
+        <input type="number"  min="0" step="any" name="volume" class="form-control" value="{{attributes.volume}}">
+    </div>
+
+    {% endif %}
 
     {% if attributes.unit == "kilogrammaa" %}
     <div class="radio">
@@ -93,7 +117,7 @@
 
     <div class="radio">
         <label>
-            <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa">
+            <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa" checked>
             kilogrammaa (kg)
         </label>
     </div>
