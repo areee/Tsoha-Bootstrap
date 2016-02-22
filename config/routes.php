@@ -1,5 +1,9 @@
 <?php
 
+//function check_logged_in() {
+//    BaseController::check_logged_in();
+//}
+
 $routes->get('/', function() {
     FoodController::index();
 });

@@ -25,4 +25,19 @@ class BaseController {
         }
     }
 
+    public static function check_is_admin() {
+        // metodi tarkistaa, onko kirjautuneella käyttäjällä admin-oikeudet
+        if (isset($_SESSION['chef'])) {
+            $chef_id = $_SESSION['chef'];
+            $chef = Chef::find($chef_id);
+            $is_admin = $chef->is_admin;
+
+            if (!$is_admin) {
+                Redirect::to('/food', array('message' => 'Toiminto epäonnistui, sillä et ole ylläpitäjä!'));
+            }
+        } else {
+            Redirect::to('/login', array('message' => 'Kirjaudu ensin sisään!'));
+        }
+    }
+
 }
