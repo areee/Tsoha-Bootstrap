@@ -21,4 +21,9 @@ class ChefController extends BaseController {
         }
     }
 
+    public static function logout() {
+        $_SESSION['chef'] = null;
+        Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
+    }
+
 }

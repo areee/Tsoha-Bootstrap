@@ -43,6 +43,10 @@ $routes->post('/login', function() {
     ChefController::handle_login();
 });
 
+$routes->post('/logout', function() {
+    ChefController::logout();
+});
+
 $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
 });

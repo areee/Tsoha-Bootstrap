@@ -33,7 +33,7 @@ class BaseController {
             $is_admin = $chef->is_admin;
 
             if (!$is_admin) {
-                Redirect::to('/food', array('message' => 'Toiminto epäonnistui, sillä et ole ylläpitäjä!'));
+                Redirect::to('/', array('message' => 'Toiminto epäonnistui, sillä et ole ylläpitäjä!'));
             }
         } else {
             Redirect::to('/login', array('message' => 'Kirjaudu ensin sisään!'));
