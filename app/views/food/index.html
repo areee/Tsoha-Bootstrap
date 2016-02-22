@@ -1,5 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
 {% if user_logged_in %}
 <h1>Käyttäjän {{user_logged_in.username}} ruokakomero</h1>
 {% else %}

@@ -69,7 +69,7 @@ class Food extends BaseModel {
 //        Kint::dump($row);
     }
 
-    public function delete() {
+    public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Food WHERE id = :id');
         $query->execute(array('id' => $this->id)); //, 'added' => $this->added, 'updated' => $this->updated
 //        $row = $query->fetch();

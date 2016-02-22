@@ -77,7 +77,7 @@ class FoodController extends BaseController {
 
     public static function destroy($id) {
         $food = new Food(array('id' => $id));
-        $food->delete();
+        $food->destroy();
 
         Redirect::to('/food', array('message' => 'Raaka-aine on poistettu onnistuneesti!'));
     }
