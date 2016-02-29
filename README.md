@@ -28,6 +28,5 @@ Järjestelmän tarkoituksena on helpottaa kuluttajaa tämän kotiruoan suunnitte
 	- käyttäjätunnus: asdf
 	- salasana: asdf123
 
-## Lisenssi
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons -lisenssi" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Tämä teos on lisensoitu <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Nimeä-EiKaupallinen-JaaSamoin 4.0 Kansainvälinen -lisenssillä</a>.
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons -lisenssi" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Joka Kodin Ruokapalvelu</span>, jonka tekijä on <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Arttu Ylhävuori</span>, on lisensoitu <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Creative Commons Nimeä-EiKaupallinen-JaaSamoin 4.0 Kansainvälinen -lisenssillä</a>.
