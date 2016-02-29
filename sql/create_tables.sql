@@ -1,11 +1,10 @@
--- Lisää CREATE TABLE lauseet tähän tiedostoon
 CREATE TABLE Chef(
 	id SERIAL PRIMARY KEY,
-	username varchar(20) NOT NULL,
+	username varchar(20) UNIQUE NOT NULL,
 	password varchar(20) NOT NULL,
-	is_admin boolean default false ,
-	added DATE,
-	updated DATE
+	is_admin boolean DEFAULT false,
+	added DATE NOT NULL,
+	updated DATE NOT NULL
 );
 
 CREATE TABLE Food(
@@ -13,8 +12,10 @@ CREATE TABLE Food(
 	name varchar(50) NOT NULL,
 	volume double precision NOT NULL,
 	unit varchar(20) NOT NULL,
-	added DATE,
-	updated DATE
+	description varchar(100),
+	chef_id integer REFERENCES Chef(id) ON DELETE CASCADE,
+	added DATE NOT NULL,
+	updated DATE NOT NULL
 );
 
 CREATE TABLE Recipe(
@@ -25,24 +26,16 @@ CREATE TABLE Recipe(
 	instructions varchar(1000) NOT NULL,
 	source varchar(50) NOT NULL,
 	portions INTEGER NOT NULL,
-	added DATE,
-	updated DATE
-);
-
-CREATE TABLE ChefFood(
-id SERIAL PRIMARY KEY,
-chef_id INTEGER REFERENCES Chef(id),
-food_id INTEGER REFERENCES Food(id)
-);
-
-CREATE TABLE ChefRecipe(
-id SERIAL PRIMARY KEY,
-chef_id INTEGER REFERENCES Chef(id),
-recipe_id INTEGER REFERENCES Recipe(id)
+	description varchar(100),
+	chef_id integer REFERENCES Chef(id) ON DELETE CASCADE,
+	added DATE NOT NULL,
+	updated DATE NOT NULL
 );
 
 CREATE TABLE RecipeFood(
-id SERIAL PRIMARY KEY,
-recipe_id INTEGER REFERENCES Recipe(id),
-food_id INTEGER REFERENCES Food(id)
+	id SERIAL PRIMARY KEY,
+	recipe_id INTEGER REFERENCES Recipe(id) ON DELETE CASCADE,
+	food_id INTEGER REFERENCES Food(id) ON DELETE CASCADE,
+	added DATE NOT NULL,
+	updated DATE NOT NULL
 );
