@@ -7,7 +7,7 @@ class Recipe extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-//        $this->validators = array('validate_name', 'validate_volume', 'validate_unit');
+        $this->validators = array('validate_name');
     }
 
     public static function all() {
@@ -62,15 +62,19 @@ class Recipe extends BaseModel {
     public function save() {
         $query = DB::connection()->prepare(
                 'INSERT INTO Recipe ('
-                . 'name, volume, unit, instructions, source,'
+                . 'name, '
+//                . 'volume, unit,'
+                . 'instructions, source,'
                 . 'portions, description, chef_id, added, updated)'
-                . 'VALUES (:name, :volume, :unit, :instructions, :source,'
+                . 'VALUES (:name,'
+//                . ':volume, :unit,'
+                . ':instructions, :source,'
                 . ':portions, :description, :chef_id, CURRENT_DATE, CURRENT_DATE)'
                 . ' RETURNING id');
         $query->execute(array(
             'name' => $this->name,
-            'volume' => $this->volume,
-            'unit' => $this->unit,
+//            'volume' => $this->volume,
+//            'unit' => $this->unit,
             'instructions' => $this->instructions,
             'source' => $this->source,
             'portions' => $this->portions,
@@ -85,14 +89,15 @@ class Recipe extends BaseModel {
     public function update() {
         $query = DB::connection()->prepare(
                 'UPDATE Recipe SET name = :name,'
-                . 'volume = :volume, unit = :unit, instructions = :instructions,'
+//                . 'volume = :volume, unit = :unit,'
+                . ' instructions = :instructions,'
                 . 'source = :source, portions = :portions,'
                 . 'description = :description,'
                 . 'updated = CURRENT_DATE WHERE id = :id');
         $query->execute(array(
             'name' => $this->name,
-            'volume' => $this->volume,
-            'unit' => $this->unit,
+//            'volume' => $this->volume,
+//            'unit' => $this->unit,
             'instructions' => $this->instructions,
             'source' => $this->source,
             'portions' => $this->portions,
@@ -104,6 +109,27 @@ class Recipe extends BaseModel {
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Recipe WHERE id = :id');
         $query->execute(array('id' => $this->id));
+    }
+
+    // validointimetodit:
+    public function validate_name() {
+        $errors = array();
+        $validate_string_length = 'validate_string_length';
+        $errors = $this->{$validate_string_length}
+                ($this->name, strlen($this->name));
+        return $errors;
+    }
+
+    public function validate_string_length($string, $length) {
+        $errors = array();
+        if ($string == '' || $string == null) {
+            $errors[] = 'Merkkijono ei saa olla tyhjä!';
+        }
+        if ($length < 3) {
+            $errors[] = 'Merkkijonon "' . $string .
+                    '" pituuden tulee olla vähintään kolme merkkiä!';
+        }
+        return $errors;
     }
 
 }

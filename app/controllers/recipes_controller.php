@@ -21,8 +21,8 @@ class RecipeController extends BaseController {
         $params = $_POST;
         $attributes = array(
             'name' => $params['name'],
-            'volume' => $params['volume'],
-            'unit' => $params['unit'],
+//            'volume' => $params['volume'],
+//            'unit' => $params['unit'],
             'instructions' => $params['instructions'],
             'source' => $params['source'],
             'portions' => $params['portions'],
@@ -64,8 +64,8 @@ class RecipeController extends BaseController {
         $attributes = array(
             'id' => $id,
             'name' => $params['name'],
-            'volume' => $params['volume'],
-            'unit' => $params['unit'],
+//            'volume' => $params['volume'],
+//            'unit' => $params['unit'],
             'instructions' => $params['instructions'],
             'source' => $params['source'],
             'portions' => $params['portions'],

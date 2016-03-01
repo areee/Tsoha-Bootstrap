@@ -12,7 +12,7 @@
 </div>
 {% endif %}
 
-<form method="post" action="{{base_path}}/food">
+<form method="post" action="{{base_path}}/recipe">
     <div class="form-group">
         <label class="control-label">Nimi</label>
         <input type="text" name="name" class="form-control" value="{{attributes.name}}">
@@ -25,7 +25,7 @@
 
     <div class="form-group">
         <label class="control-label">Annoskoko</label>
-        <input type="text" name="portions" class="form-control" value="{{attributes.portions}}">
+        <input type="number" name="portions" class="form-control" value="{{attributes.portions}}">
     </div>
 
     <label class="control-label">Raaka-aineet</label>
@@ -40,7 +40,7 @@
 
     <div class="form-group">
         <label class="control-label">Reseptin lähde</label>
-        <input type="url" name="source" class="form-control" value="{{attributes.source}}">
+        <input type="text" name="source" class="form-control" value="{{attributes.source}}">
     </div>
 
     <div class="form-group">
