@@ -2,7 +2,7 @@
 
 class Food extends BaseModel {
 
-    public $id, $name, $volume, $unit, $added, $updated;
+    public $id, $name, $volume, $unit, $description, $chef_id, $added, $updated;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
@@ -22,6 +22,8 @@ class Food extends BaseModel {
                 'name' => $row['name'],
                 'volume' => $row['volume'],
                 'unit' => $row['unit'],
+                'description' => $row['description'],
+                'chef_id' => $row['chef_id'],
                 'added' => $row['added'],
                 'updated' => $row['updated']
             ));
@@ -41,6 +43,8 @@ class Food extends BaseModel {
                 'name' => $row['name'],
                 'volume' => $row['volume'],
                 'unit' => $row['unit'],
+                'description' => $row['description'],
+                'chef_id' => $row['chef_id'],
                 'added' => $row['added'],
                 'updated' => $row['updated']
             ));
@@ -51,11 +55,15 @@ class Food extends BaseModel {
 
     public function save() {
         $query = DB::connection()->prepare(
-                'INSERT INTO Food (name, volume, unit, added, updated)'
-                . ' VALUES (:name, :volume, :unit, CURRENT_DATE, CURRENT_DATE)'
-                . ' RETURNING id');
-        $query->execute(array('name' => $this->name, 'volume' => $this->volume,
-            'unit' => $this->unit));
+                'INSERT INTO Food (name, volume, unit, description, chef_id,'
+                . ' added, updated) VALUES (:name, :volume, :unit, :description,'
+                . ' :chef_id, CURRENT_DATE, CURRENT_DATE) RETURNING id');
+        $query->execute(array(
+            'name' => $this->name,
+            'volume' => $this->volume,
+            'unit' => $this->unit,
+            'description' => $this->description,
+            'chef_id' => $this->chef_id));
 
         $row = $query->fetch();
 
@@ -65,9 +73,13 @@ class Food extends BaseModel {
     public function update() {
         $query = DB::connection()->prepare(
                 'UPDATE Food SET name = :name, volume = :volume, unit = :unit,'
-                . ' updated = CURRENT_DATE WHERE id = :id');
-        $query->execute(array('name' => $this->name, 'volume' => $this->volume,
-            'unit' => $this->unit, 'id' => $this->id));
+                . 'description = :description, updated = CURRENT_DATE WHERE id = :id');
+        $query->execute(array(
+            'name' => $this->name,
+            'volume' => $this->volume,
+            'unit' => $this->unit,
+            'description' => $this->description,
+            'id' => $this->id));
         $row = $query->fetch();
     }
 
@@ -76,6 +88,7 @@ class Food extends BaseModel {
         $query->execute(array('id' => $this->id));
     }
 
+    // validointimetodit:
     public function validate_name() {
         $errors = array();
         $validate_string_length = 'validate_string_length';

@@ -14,14 +14,17 @@ class FoodController extends BaseController {
         View::make('food/show.html', array('food' => $food));
     }
 
+    // raaka-aineen lisäys:
     public static function store() {
         self::check_logged_in();
-        self::check_is_admin();
+//        self::check_is_admin();
         $params = $_POST;
         $attributes = array(
             'name' => $params['name'],
             'volume' => $params['volume'],
-            'unit' => $params['unit']
+            'description' => $params['description'],
+            'unit' => $params['unit'],
+            'chef_id'=> self::get_user_logged_in()->id
         );
 
         $food = new Food($attributes);
@@ -38,26 +41,28 @@ class FoodController extends BaseController {
 
     public static function create() {
         self::check_logged_in();
-        self::check_is_admin();
+//        self::check_is_admin();
         View::make('food/new.html');
     }
 
     public static function edit($id) {
         self::check_logged_in();
-        self::check_is_admin();
+//        self::check_is_admin();
         $food = Food::find($id);
         View::make('food/edit.html', array('attributes' => $food));
     }
 
+    // raaka-aineen päivitys:
     public static function update($id) {
         self::check_logged_in();
-        self::check_is_admin();
+//        self::check_is_admin();
         $params = $_POST;
 
         $attributes = array(
             'id' => $id,
             'name' => $params['name'],
             'volume' => $params['volume'],
+            'description' => $params['description'],
             'unit' => $params['unit']
         );
 
@@ -73,6 +78,7 @@ class FoodController extends BaseController {
         }
     }
 
+    // raaka-aineen poisto:
     public static function destroy($id) {
         self::check_logged_in();
         self::check_is_admin();

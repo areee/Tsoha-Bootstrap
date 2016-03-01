@@ -8,7 +8,9 @@
 {% endif %}
 
 {% import "macros/forms.html" as forms %}
+
 <h1>Raaka-aineen "{{food.name}}" tiedot</h1>
+<i>{{food.description}}</i>
 
 <p>
     {{forms.destroy_button("#{base_path}/food/#{food.id}/destroy")}}
@@ -28,7 +30,7 @@
     </li>
     <li><strong>Lisätty: </strong>{{food.added}}</li>
     <li><strong>Muokattu viimeksi: </strong>{{food.updated}}</li>
-    <li><strong>Lisääjä: </strong>{{user_logged_in.username}}</li>
+    <li><strong>Lisääjä: </strong>{{food.chef_id}}</li>
 </ul>
 
 {% endblock %}
