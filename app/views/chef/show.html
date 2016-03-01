@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
+{% import "macros/forms.html" as forms %}
+
+<h1>Kokkailijan "{{chef.username}}" tiedot</h1>
+
+<p>
+    {{forms.destroy_button("#{base_path}/chef/#{chef.id}/destroy")}}
+    <a href="{{base_path}}/chef/{{chef.id}}/edit" class="btn btn-default">Muokkaa</a>
+</p>
+
+<ul>
+    <li><strong>Salasana: </strong>{{chef.password}}</li>
+    <li><strong>Onko ylläpitäjä: </strong>{{chef.is_admin}}</li>
+    <li><strong>Lisätty: </strong>{{chef.added}}</li>
+    <li><strong>Muokattu: </strong>{{chef.updated}}</li>
+
+</ul>
+
+{% endblock %}

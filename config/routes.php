@@ -109,3 +109,7 @@ $routes->post('/signup', function() {
 $routes->get('/hiekkalaatikko', function() {
     HelloWorldController::sandbox();
 });
+
+$routes->get('/rek', function() {
+    HelloWorldController::register();
+});
