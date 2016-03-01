@@ -6,6 +6,10 @@ class ChefController extends BaseController {
         View::make('chef/login.html');
     }
 
+    public static function signup() {
+        View::make('chef/signup.html');
+    }
+
     public static function handle_login() {
         $params = $_POST;
 
@@ -13,6 +17,21 @@ class ChefController extends BaseController {
 
         if (!$chef) {
             View::make('chef/login.html', array('error' => 'Väärä käyttäjätunnus'
+                . ' tai salasana!', 'username' => $params['username']));
+        } else {
+            $_SESSION['chef'] = $chef->id;
+
+            Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $chef->username . '!'));
+        }
+    }
+
+    public static function handle_signup() {
+        $params = $_POST;
+
+        $chef = Chef::signup($params['username'], $params['password']);
+
+        if (!$chef) {
+            View::make('chef/signup.html', array('error' => 'Väärä käyttäjätunnus'
                 . ' tai salasana!', 'username' => $params['username']));
         } else {
             $_SESSION['chef'] = $chef->id;

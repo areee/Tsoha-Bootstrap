@@ -72,6 +72,13 @@ $routes->post('/logout', function() {
     ChefController::logout();
 });
 
+$routes->get('/signup', function() {
+    ChefController::signup();
+});
+$routes->post('/signup', function() {
+    ChefController::handle_signup();
+});
+
 // nämä kesken:
 // kirjautumis-/sessiotoiminnot:
 //$routes->get('/login', function() {
