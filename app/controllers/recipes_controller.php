@@ -14,9 +14,10 @@ class RecipeController extends BaseController {
         View::make('recipe/show.html', array('recipe' => $recipe));
     }
 
+    // reseptin lisäys:
     public static function store() {
         self::check_logged_in();
-        self::check_is_admin();
+//        self::check_is_admin();
         $params = $_POST;
         $attributes = array(
             'name' => $params['name'],
@@ -24,7 +25,9 @@ class RecipeController extends BaseController {
             'unit' => $params['unit'],
             'instructions' => $params['instructions'],
             'source' => $params['source'],
-            'portions' => $params['portions']
+            'portions' => $params['portions'],
+            'description' => $params['description'],
+            'chef_id' => self::get_user_logged_in()->id
         );
 
         $recipe = new Recipe($attributes);
@@ -41,20 +44,21 @@ class RecipeController extends BaseController {
 
     public static function create() {
         self::check_logged_in();
-        self::check_is_admin();
+//        self::check_is_admin();
         View::make('recipe/new.html');
     }
 
     public static function edit($id) {
         self::check_logged_in();
-        self::check_is_admin();
+//        self::check_is_admin();
         $recipe = Recipe::find($id);
         View::make('recipe/edit.html', array('attributes' => $recipe));
     }
 
+    // reseptin päivitys:
     public static function update($id) {
         self::check_logged_in();
-        self::check_is_admin();
+//        self::check_is_admin();
         $params = $_POST;
 
         $attributes = array(
@@ -64,7 +68,8 @@ class RecipeController extends BaseController {
             'unit' => $params['unit'],
             'instructions' => $params['instructions'],
             'source' => $params['source'],
-            'portions' => $params['portions']
+            'portions' => $params['portions'],
+            'description' => $params['description']
         );
 
         $recipe = new Recipe($attributes);
@@ -79,6 +84,7 @@ class RecipeController extends BaseController {
         }
     }
 
+    // reseptin poisto:
     public static function destroy($id) {
         self::check_logged_in();
         self::check_is_admin();

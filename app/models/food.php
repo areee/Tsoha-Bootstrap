@@ -6,8 +6,8 @@ class Food extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name',
-            'validate_volume', 'validate_unit');
+        $this->validators = array('validate_name', 'validate_volume',
+            'validate_unit');
     }
 
     public static function all() {
@@ -55,8 +55,9 @@ class Food extends BaseModel {
 
     public function save() {
         $query = DB::connection()->prepare(
-                'INSERT INTO Food (name, volume, unit, description, chef_id,'
-                . ' added, updated) VALUES (:name, :volume, :unit, :description,'
+                'INSERT INTO Food ('
+                . 'name, volume, unit, description, chef_id, added, updated)'
+                . 'VALUES (:name, :volume, :unit, :description,'
                 . ' :chef_id, CURRENT_DATE, CURRENT_DATE) RETURNING id');
         $query->execute(array(
             'name' => $this->name,

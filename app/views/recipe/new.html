@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Lisää resepti Reseptipankkiin</h1>
+
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
+
+<form method="post" action="{{base_path}}/food">
+    <div class="form-group">
+        <label class="control-label">Nimi</label>
+        <input type="text" name="name" class="form-control" value="{{attributes.name}}">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Kuvaus</label>
+        <input type="text" name="description" class="form-control" value="{{attributes.description}}">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Annoskoko</label>
+        <input type="text" name="portions" class="form-control" value="{{attributes.portions}}">
+    </div>
+
+    <label class="control-label">Raaka-aineet</label>
+    <p>Tähän väliin raaka-aineet, niiden määrät + yksiköt</p>
+
+    <div class="form-group">
+        <label class="control-label">Ohjeet</label>
+        <input type="text" name="instructions" class="form-control" value="{{attributes.instructions}}">
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">Reseptin lähde</label>
+        <input type="url" name="source" class="form-control" value="{{attributes.source}}">
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+</form>
+{% endblock %}

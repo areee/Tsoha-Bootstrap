@@ -2,7 +2,7 @@
 
 require_once 'app/models/chef.php';
 
-class SessionController extends BaseController {
+class LoginController extends BaseController {
 
     public static function create() {
         View::make('session/new.html');

@@ -9,6 +9,7 @@
 
 {% import "macros/forms.html" as forms %}
 <h1>Reseptin "{{recipe.name}}" tiedot</h1>
+<i>{{recipe.description}}</i>
 
 <p>
     {{forms.destroy_button("#{base_path}/recipe/#{recipe.id}/destroy")}}
@@ -20,6 +21,7 @@
 <p><strong>Lisätty: </strong>{{recipe.added}}</p>
 <p><strong>Muokattu viimeksi: </strong>{{recipe.updated}}</p>
 <p><strong>Reseptin lähde: </strong>{{recipe.source}}</p>
+<p><strong>Lisääjä: </strong>{{recipe.chef_id}}</p>
 
 <h3>Raaka-aineet</h3>
 
