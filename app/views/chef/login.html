@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
 
+
+
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
+</div>
+{% endif %}
+
 <h1>Tervetuloa Joka Kodin Ruokapalveluun!</h1>
 <h1>Kirjaudu sisään, ole hyvä!</h1>
 
