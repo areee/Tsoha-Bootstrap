@@ -40,4 +40,19 @@ class BaseController {
         }
     }
 
+    public static function get_admin_status() {
+        // Toteuta kirjautuneen käyttäjän haku tähän
+        // Katsotaan onko user-avain sessiossa
+        if (isset($_SESSION['chef'])) {
+            $chef_id = $_SESSION['chef'];
+            // Pyydetään User-mallilta käyttäjä session mukaisella id:llä
+            $chef = Chef::find($chef_id);
+            $is_admin = $chef->is_admin;
+
+            return $is_admin;
+        }
+        // Käyttäjä ei ole kirjautunut sisään
+        return null;
+    }
+
 }

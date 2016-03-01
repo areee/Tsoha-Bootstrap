@@ -54,7 +54,7 @@ class HelloWorldController extends BaseController {
     }
     
     public static function register() {
-        View::make('chef/signup.html');
+        View::make('chef/new.html');
     }
 
 }
