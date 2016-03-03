@@ -63,31 +63,31 @@ $routes->post('/recipe/:id/destroy', function($id) {
 
 // käyttäjien hallinta:
 $routes->get('/chef', function() {
-    ChefController::index();
+  UserController::index();
+    // ChefController::index();
 });
 
-$routes->post('/chef', function() {
-    ChefController::store();
+$routes->post('/signup', function() {
+    UserController::store();
 });
 
-$routes->get('/chef/new', function() { //ikään kuin signup
-    ChefController::create();
-      //  HelloWorldController::register();
+$routes->get('/signup', function() { // voisi olla myös chef/new tai register
+    UserController::create();
 });
 
 $routes->get('/chef/:id', function($id) {
-    ChefController::show($id);
+    UserController::show($id);
 });
 
 $routes->get('/chef/:id/edit', function($id) {
-    ChefController::edit($id);
+    UserController::edit($id);
 });
 $routes->post('/chef/:id/edit', function($id) {
-    ChefController::update($id);
+    UserController::update($id);
 });
 
 $routes->post('/chef/:id/destroy', function($id) {
-    ChefController::destroy($id);
+    UserController::destroy($id);
 });
 
 // sisään- ja uloskirjautuminen:

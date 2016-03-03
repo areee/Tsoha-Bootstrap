@@ -2,11 +2,12 @@
 
 class Chef extends BaseModel {
 
-    public $id, $username, $password, $is_admin, $added, $updated;
+    public $id, $username, $password, $password_verification, $is_admin, $added, $updated;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name');
+        $this->validators = array('validate_username', 'validate_password',
+        'validate_password_verification', 'validate_passwords');
     }
 
     public static function all() {
@@ -82,30 +83,60 @@ class Chef extends BaseModel {
     }
 
     // validointimetodit:
-    public function validate_name() {
+
+    public function validate_string_length($method, $string, $length) {
         $errors = array();
-        $validate_string_length = 'validate_string_length';
-        $errors = $this->{$validate_string_length}
-                ($this->name, strlen($this->name));
+        if ($string == '' || $string == null) {
+            $errors[] = $method . ' ei saa olla tyhjä!';
+        }
+        if ($length < 3) {
+            $errors[] = $method . ' "' . $string .
+                    '": pituuden tulee olla vähintään kolme merkkiä!';
+        }
         return $errors;
     }
 
-    public function validate_string_length($string, $length) {
+
+
+    public function validate_username() {
         $errors = array();
-        if ($string == '' || $string == null) {
-            $errors[] = 'Merkkijono ei saa olla tyhjä!';
-        }
-        if ($length < 3) {
-            $errors[] = 'Merkkijonon "' . $string .
-                    '" pituuden tulee olla vähintään kolme merkkiä!';
+        $validate_string_length = 'validate_string_length';
+        $errors = $this->{$validate_string_length}
+                ('Käyttäjätunnus', $this->username, strlen($this->username));
+        return $errors;
+    }
+
+    public function validate_password() {
+        $errors = array();
+        $validate_string_length = 'validate_string_length';
+        $errors = $this->{$validate_string_length}
+                ('Salasana', $this->password, strlen($this->password));
+        return $errors;
+    }
+
+    public function validate_password_verification() {
+        $errors = array();
+        $validate_string_length = 'validate_string_length';
+        $errors = $this->{$validate_string_length}
+                ('Salasanavahvistus', $this->password_verification, strlen($this->password_verification));
+        return $errors;
+    }
+
+    public function validate_passwords() {
+        $errors = array();
+        if(strcmp($this->password,$this->password_verification)!==0){
+          $errors[] = 'Salasanat eivät täsmää!';
         }
         return $errors;
     }
 
     //sisään- ja uloskirjautumistoiminnot:
     public static function authenticate($username, $password) {
-        $query = DB::connection()->prepare('SELECT * FROM Chef WHERE username = :username AND password = :password LIMIT 1');
-        $query->execute(array('username' => $username, 'password' => $password));
+        $query = DB::connection()->prepare('SELECT * FROM Chef WHERE
+           username = :username AND password = :password LIMIT 1');
+        $query->execute(array(
+          'username' => $username,
+          'password' => $password));
         $row = $query->fetch();
         if ($row) {
             // Käyttäjä löytyi, palautetaan löytynyt käyttäjä oliona

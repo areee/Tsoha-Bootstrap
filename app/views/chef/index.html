@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% if message %}
+<!-- {% if message %}
 <div class="alert alert-success">
     {{message}}
 </div>
-{% endif %}
+{% endif %} -->
 
 <h1>Joka Kodin Ruokapalvelun kokkailijat</h1>
 
@@ -30,7 +30,11 @@
         <tr>
             <td><a href="{{base_path}}/chef/{{chef.id}}">{{chef.username}}</td>
             <td>{{chef.password}}</td>
-            <td>{{chef.is_admin}}</td>
+            {% if chef.is_admin %}
+            <td>on</td>
+            {% else %}
+            <td>ei</td>
+            {% endif %}
             <td>{{chef.added}}</td>
             <td>{{chef.updated}}</td>
             <td><a class="btn btn-default btn-sm" href="{{base_path}}/chef/{{chef.id}}/edit">Muokkaa</a></td>

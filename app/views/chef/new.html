@@ -3,42 +3,41 @@
 
 <h1>Rekisteröidy Joka Kodin Ruokapalveluun</h1>
 
-{% if error %}
-<div class="alert alert-danger">
-    {{error}}
+{% if message %}
+<div class="alert alert-success">
+    {{message}}
 </div>
 {% endif %}
 
-<form method="post" action="{{base_path}}/chef">
-    <div class="form-group">
-        <label class="control-label">Käyttäjätunnus</label>
-        <input type="text" name="username" class="form-control" value="{{attributes.username}}">
-    </div>
+{% if errors %}
+<div class="alert alert-danger">
+    <ul>
+        {% for error in errors %}
+        <li>{{error}}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}
 
-    <div class="form-group">
-        <label class="control-label">Salasana</label>
-        <input type="password" class="form-control" name="password" value="{{attributes.password}}">
-    </div>
+<form method="post" action="{{base_path}}/signup">
 
-    <!--    <div class="form-group">
-            <label>Salasana uudelleen</label>
-            <input type="password" class="form-control" name="password_verification">
-        </div>-->
+    <div class="form-group"> <label class="control-label">Käyttäjätunnus</label>
+  <input type="text" name="username" class="form-control"
+  value="{{attributes.username}}"> </div>
 
+    <div class="form-group"> <label class="control-label">Salasana</label>
+    <input type="password" class="form-control" name="password"
+    value="{{attributes.password}}"> </div>
 
-    <div class="radio">
-        <label>
-            <input type="radio" name="is_admin" id="optionsRadios1" value="false" checked>
-            false
-        </label>
-    </div>
+       <div class="form-group"> <label>Salasana uudelleen</label> <input
+       type="password" class="form-control" name="password_verification"
+       value="{{attributes.password_verification}}"> </div>
 
-    <div class="radio">
-        <label>
-            <input type="radio" name="is_admin" id="optionsRadios2" value="true">
-            true
-        </label>
-    </div>
+    <div class="radio"> <label> <input type="radio" name="is_admin"
+id="optionsRadios1" value="false" checked> false </label> </div>
+
+    <div class="radio"> <label> <input type="radio" name="is_admin"
+id="optionsRadios2" value="true"> true </label> </div>
 
     <button type="submit" class="btn btn-primary">Rekisteröidy</button>
 </form>

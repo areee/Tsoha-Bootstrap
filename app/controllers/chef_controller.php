@@ -41,8 +41,6 @@ class ChefController extends BaseController {
     }
 
     public static function create() {
-//        self::check_logged_in();
-//        self::check_is_admin();
         View::make('chef/new.html');
     }
 
