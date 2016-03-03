@@ -19,8 +19,10 @@ class RecipeController extends BaseController {
         self::check_logged_in();
 //        self::check_is_admin();
         $params = $_POST;
+        $foods = $params['foods']; // testaa, toimiiko!
         $attributes = array(
             'name' => $params['name'],
+            'food' => array(), //testaa, toimiiko!
 //            'volume' => $params['volume'],
 //            'unit' => $params['unit'],
             'instructions' => $params['instructions'],
@@ -29,6 +31,11 @@ class RecipeController extends BaseController {
             'description' => $params['description'],
             'chef_id' => self::get_user_logged_in()->id
         );
+
+        //testaa, toimiiko!
+        foreach ($foods as $food) {
+          $attributes['foods'][] = $food;
+        }
 
         $recipe = new Recipe($attributes);
         $errors = $recipe->errors();

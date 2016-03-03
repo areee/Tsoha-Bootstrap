@@ -72,6 +72,7 @@ $routes->post('/chef', function() {
 
 $routes->get('/chef/new', function() { //ikään kuin signup
     ChefController::create();
+      //  HelloWorldController::register();
 });
 
 $routes->get('/chef/:id', function($id) {

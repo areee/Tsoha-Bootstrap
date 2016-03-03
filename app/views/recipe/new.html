@@ -18,33 +18,35 @@
         <input type="text" name="name" class="form-control" value="{{attributes.name}}">
     </div>
 
-    <div class="form-group">
-        <label class="control-label">Kuvaus</label>
-        <input type="text" name="description" class="form-control" value="{{attributes.description}}">
+    <div class="form-group"> <label class="control-label">Kuvaus</label> <input
+    type="text" name="description" class="form-control"
+    value="{{attributes.description}}"> </div>
+
+    <div class="form-group"> <label class="control-label">Annoskoko</label>
+    <input type="number" name="portions" class="form-control"
+    value="{{attributes.portions}}"> </div>
+
+    <!-- <label class="control-label">Raaka-aineet</label>
+    <p>Tähän väliin raaka-aineet, niiden määrät + yksiköt</p> -->
+
+    <!-- <div class="form-group"> <label>Raaka-aineet</label> <select
+    class="form-control" name="food"> {% for food in foods %} <option
+    value="{{food.id}}">{{food.name}}</option> {% endfor %} </select> </div> -->
+
+    <!--testaa, toimiiko ao. div!-->
+    <div class="form-group"> <label>Raaka-aineet</label> <select
+    class="form-control" name="food[]" multiple=""> {% for food in foods %}
+    <option value="{{food.id}}">{{food.name}}</option> {% endfor %} </select>
     </div>
 
-    <div class="form-group">
-        <label class="control-label">Annoskoko</label>
-        <input type="number" name="portions" class="form-control" value="{{attributes.portions}}">
-    </div>
 
-    <label class="control-label">Raaka-aineet</label>
-    <p>Tähän väliin raaka-aineet, niiden määrät + yksiköt</p>
+    <div class="form-group"> <label class="control-label">Ohjeet</label>
+    <textarea name="instructions" class="form-control"
+    rows="10">{{attributes.instructions}}</textarea> </div>
 
-    <div class="form-group">
-        <label class="control-label">Ohjeet</label>
-        <textarea name="instructions" class="form-control" rows="10">
-        {{attributes.instructions}}
-        </textarea>
-    </div>
+    <div class="form-group"> <label class="control-label">Reseptin lähde</label>
+    <input type="text" name="source" class="form-control"
+    value="{{attributes.source}}"> </div>
 
-    <div class="form-group">
-        <label class="control-label">Reseptin lähde</label>
-        <input type="text" name="source" class="form-control" value="{{attributes.source}}">
-    </div>
-
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Lisää</button>
-    </div>
-</form>
-{% endblock %}
+    <div class="form-group"> <button type="submit" class="btn
+    btn-primary">Lisää</button> </div> </form> {% endblock %}
