@@ -92,13 +92,13 @@ $routes->post('/chef/:id/destroy', function($id) {
 
 // sisään- ja uloskirjautuminen:
 $routes->get('/login', function() {
-    ChefController::login();
+    SessionController::login();
 });
 $routes->post('/login', function() {
-    ChefController::handle_login();
+    SessionController::handle_login();
 });
 $routes->post('/logout', function() {
-    ChefController::logout();
+    SessionController::logout();
 });
 
 // hiekkalaatikko testausta varten:

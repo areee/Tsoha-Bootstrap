@@ -5,6 +5,7 @@ class RecipeController extends BaseController {
     public static function index() {
         self::check_logged_in();
         $recipes = Recipe::all();
+        
         View::make('recipe/index.html', array('recipes' => $recipes));
     }
 
