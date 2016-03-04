@@ -4,11 +4,10 @@ class Chef extends BaseModel {
 
     public $id, $username, $password, $password_verification, $is_admin, $added, $updated;
 
-    public function __construct($attributes) {
-        parent::__construct($attributes);
-        $this->validators = array('validate_username', 'validate_password',
-        'validate_password_verification', 'validate_passwords');
-    }
+    public function __construct($attributes) { parent::__construct($attributes);
+    $this->validators = array('validate_username', 'validate_password',
+    'validate_password_verification', 'validate_passwords',
+    'validate_username_not_in_use'); }
 
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Chef');
@@ -96,8 +95,6 @@ class Chef extends BaseModel {
         return $errors;
     }
 
-
-
     public function validate_username() {
         $errors = array();
         $validate_string_length = 'validate_string_length';
@@ -128,6 +125,18 @@ class Chef extends BaseModel {
           $errors[] = 'Salasanat eivät täsmää!';
         }
         return $errors;
+    }
+
+    public function validate_username_not_in_use(){
+      $chefs = Chef::all();
+      $chefnames = array();
+      foreach ($chefs as $chef) {
+            $chefnames[] = $chef->username;
+        }
+      if(in_array($this->username,$chefnames)){
+        $errors[] = 'Käyttäjänimi on jo varattu, valitse jokin muu!';
+      }
+      return $errors;
     }
 
     //sisään- ja uloskirjautumistoiminnot:
