@@ -18,7 +18,12 @@
 
 <ul>
     <li><strong>Salasana: </strong>{{chef.password}}</li>
-    <li><strong>Onko ylläpitäjä: </strong>{{chef.is_admin}}</li>
+
+    {% if chef.is_admin %}
+    <li><strong>Ylläpitäjä: </strong>kyllä</li>
+    {% else %}
+    <li><strong>Ylläpitäjä: </strong>ei</li>
+    {% endif %}
     <li><strong>Lisätty: </strong>{{chef.added}}</li>
     <li><strong>Muokattu: </strong>{{chef.updated}}</li>
 
