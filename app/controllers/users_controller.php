@@ -11,8 +11,8 @@ class UserController extends BaseController {
   }
 
   public static function show($id) {
-//        self::check_logged_in();
-//        self::check_is_admin();
+       self::check_logged_in();
+       self::check_is_admin();
       $chef = Chef::find($id);
       View::make('chef/show.html', array('chef' => $chef));
   }
@@ -48,15 +48,15 @@ class UserController extends BaseController {
   }
 
   public static function edit($id) {
-//        self::check_logged_in();
-//        self::check_is_admin();
+       self::check_logged_in();
+      //  self::check_is_admin();
       $chef = Chef::find($id);
       View::make('chef/edit.html', array('attributes' => $chef));
   }
 
   // käyttäjän päivitys:
   public static function update($id) {
-//        self::check_logged_in();
+       self::check_logged_in();
 //        self::check_is_admin();
       $params = $_POST;
 
@@ -64,6 +64,7 @@ class UserController extends BaseController {
           'id' => $id,
           'username' => $params['username'],
           'password' => $params['password'],
+          'password_verification' => $params['password_verification'],
           'is_admin' => $params['is_admin']
       );
 

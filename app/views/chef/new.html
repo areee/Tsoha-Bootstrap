@@ -21,7 +21,7 @@
 
 <form method="post" action="{{base_path}}/signup">
 
-    <div class="form-group"> <label class="control-label">Käyttäjätunnus</label>
+  <div class="form-group"> <label class="control-label">Käyttäjätunnus</label>
   <input type="text" name="username" class="form-control"
   value="{{attributes.username}}"> </div>
 
@@ -29,15 +29,29 @@
     <input type="password" class="form-control" name="password"
     value="{{attributes.password}}"> </div>
 
-       <div class="form-group"> <label>Salasana uudelleen</label> <input
-       type="password" class="form-control" name="password_verification"
-       value="{{attributes.password_verification}}"> </div>
+    <div class="form-group"> <label>Salasana uudelleen</label> <input
+    type="password" class="form-control" name="password_verification"
+    value="{{attributes.password_verification}}"> </div>
+
+    <label class="control-label">Onko ylläpitäjä</label>
+
+    {% if attributes.is_admin == 1 %}
 
     <div class="radio"> <label> <input type="radio" name="is_admin"
-id="optionsRadios1" value="false" checked> false </label> </div>
+    id="optionsRadios1" value="false"> ei </label> </div>
 
     <div class="radio"> <label> <input type="radio" name="is_admin"
-id="optionsRadios2" value="true"> true </label> </div>
+    id="optionsRadios2" value="true" checked> kyllä </label> </div>
+
+    {% else %}
+
+    <div class="radio"> <label> <input type="radio" name="is_admin"
+    id="optionsRadios1" value="false" checked> ei </label> </div>
+
+    <div class="radio"> <label> <input type="radio" name="is_admin"
+    id="optionsRadios2" value="true"> kyllä </label> </div>
+
+    {% endif %}
 
     <button type="submit" class="btn btn-primary">Rekisteröidy</button>
 </form>
