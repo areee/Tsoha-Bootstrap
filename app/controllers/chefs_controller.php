@@ -1,6 +1,6 @@
 <?php
 
-class UserController extends BaseController {
+class ChefController extends BaseController {
 
   // käyttäjien CRUD-toiminnot:
   public static function index() {
