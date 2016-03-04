@@ -133,6 +133,7 @@ class Chef extends BaseModel {
       foreach ($chefs as $chef) {
             $chefnames[] = $chef->username;
         }
+        $errors = array();
       if(in_array($this->username,$chefnames)){
         $errors[] = 'Käyttäjänimi on jo varattu, valitse jokin muu!';
       }

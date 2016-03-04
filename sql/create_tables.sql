@@ -21,11 +21,9 @@ CREATE TABLE Food(
 CREATE TABLE Recipe(
 	id SERIAL PRIMARY KEY,
 	name varchar(50) NOT NULL,
-	volume double precision[],
-	unit text[],
 	instructions varchar(1000) NOT NULL,
 	source varchar(50) NOT NULL,
-	portions INTEGER NOT NULL,
+	portions INTEGER,
 	description varchar(100),
 	chef_id integer REFERENCES Chef(id) ON DELETE CASCADE,
 	added DATE NOT NULL,
@@ -36,6 +34,8 @@ CREATE TABLE RecipeFood(
 	id SERIAL PRIMARY KEY,
 	recipe_id INTEGER REFERENCES Recipe(id) ON DELETE CASCADE,
 	food_id INTEGER REFERENCES Food(id) ON DELETE CASCADE,
+	volume double precision,
+	unit varchar(50),
 	added DATE NOT NULL,
 	updated DATE NOT NULL
 );

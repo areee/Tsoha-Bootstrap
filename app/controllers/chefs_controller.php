@@ -49,7 +49,7 @@ class ChefController extends BaseController {
 
   public static function edit($id) {
        self::check_logged_in();
-      //  self::check_is_admin();
+       self::check_is_admin();
       $chef = Chef::find($id);
       View::make('chef/edit.html', array('attributes' => $chef));
   }
@@ -57,7 +57,7 @@ class ChefController extends BaseController {
   // käyttäjän päivitys:
   public static function update($id) {
        self::check_logged_in();
-//        self::check_is_admin();
+       self::check_is_admin();
       $params = $_POST;
 
       $attributes = array(
@@ -69,21 +69,21 @@ class ChefController extends BaseController {
       );
 
       $chef = new Chef($attributes);
-      $errors = $chef->errors();
-
-      if (count($errors) > 0) {
-          View::make('chef/edit.html', array('errors' => $errors, 'attributes' => $attributes));
-      } else {
+      // $errors = $chef->errors();
+      //
+      // if (count($errors) > 0) {
+      //     // $chef = Chef::find($id);
+      //     View::make('chef/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+      // } else {
           $chef->update();
-
           Redirect::to('/chef/' . $chef->id, array('message' => 'Kokkailija on päivitetty onnistuneesti!'));
-      }
+      // }
   }
 
   // käyttäjän poisto:
   public static function destroy($id) {
-//        self::check_logged_in();
-//        self::check_is_admin();
+       self::check_logged_in();
+       self::check_is_admin();
       $chef = new Chef(array('id' => $id));
       $chef->destroy();
 
