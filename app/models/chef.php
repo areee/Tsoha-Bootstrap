@@ -83,14 +83,17 @@ class Chef extends BaseModel {
 
     // validointimetodit:
 
-    public function validate_string_length($method, $string, $length) {
+    public function validate_string_length($method, $required, $string, $length) {
         $errors = array();
-        if ($string == '' || $string == null) {
+        if ($required == true && ($string == '' || $string == null)) {
             $errors[] = $method . ' ei saa olla tyhjä!';
         }
-        if ($length < 3) {
-            $errors[] = $method . ' "' . $string .
-                    '": pituuden tulee olla vähintään kolme merkkiä!';
+        if ($required == true && $length < 3) {
+          $errors[] = $method . ' "' . $string .
+          '": pituuden tulee olla vähintään kolme merkkiä!';
+        }
+        if(preg_match("/[^A-Za-z0-9åäöÅÄÖ]/",$string)){
+          $errors[] = 'Kentässä "' . $method . '" on kiellettyjä merkkejä!';
         }
         return $errors;
     }
@@ -99,7 +102,7 @@ class Chef extends BaseModel {
         $errors = array();
         $validate_string_length = 'validate_string_length';
         $errors = $this->{$validate_string_length}
-                ('Käyttäjätunnus', $this->username, strlen($this->username));
+                ('Käyttäjätunnus', true, $this->username, strlen($this->username));
         return $errors;
     }
 
@@ -107,7 +110,7 @@ class Chef extends BaseModel {
         $errors = array();
         $validate_string_length = 'validate_string_length';
         $errors = $this->{$validate_string_length}
-                ('Salasana', $this->password, strlen($this->password));
+                ('Salasana', true, $this->password, strlen($this->password));
         return $errors;
     }
 
@@ -115,7 +118,7 @@ class Chef extends BaseModel {
         $errors = array();
         $validate_string_length = 'validate_string_length';
         $errors = $this->{$validate_string_length}
-                ('Salasanavahvistus', $this->password_verification, strlen($this->password_verification));
+                ('Salasanavahvistus', true, $this->password_verification, strlen($this->password_verification));
         return $errors;
     }
 

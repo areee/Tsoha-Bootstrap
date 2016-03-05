@@ -98,12 +98,11 @@ class Food extends BaseModel {
         }
         if ($required == true && $length < 3) {
           $errors[] = $method . ' "' . $string .
-                  '": pituuden tulee olla vähintään kolme merkkiä!';
+          '": pituuden tulee olla vähintään kolme merkkiä!';
         }
         if(preg_match("/[^A-Za-z0-9åäöÅÄÖ]/",$string)){
-          $errors[] = 'Kentässä ' . $method . ' on kiellettyjä merkkejä!';
+          $errors[] = 'Kentässä "' . $method . '" on kiellettyjä merkkejä!';
         }
-
         return $errors;
     }
 

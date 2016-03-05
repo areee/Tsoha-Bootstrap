@@ -18,7 +18,7 @@
         <tr>
             <th>Käyttäjänimi</th>
             <th>Salasana</th>
-            <th>Onko ylläpitäjä</th>
+            <th>Käyttäjätyyppi</th>
             <th>Käyttäjä lisätty</th>
             <th>Muokattu viimeksi</th>
             <th></th>
@@ -30,11 +30,14 @@
         <tr>
             <td><a href="{{base_path}}/chef/{{chef.id}}">{{chef.username}}</td>
             <td>{{chef.password}}</td>
-            {% if chef.is_admin %}
-            <td>kyllä</td>
-            {% else %}
-            <td>ei</td>
-            {% endif %}
+
+            <td>
+              {% if chef.is_admin %}
+              ylläpitäjä
+              {% else %}
+              normaali käyttäjä
+              {% endif %}
+            </td>
             <td>{{chef.added}}</td>
             <td>{{chef.updated}}</td>
             <td><a class="btn btn-default btn-sm" href="{{base_path}}/chef/{{chef.id}}/edit">Muokkaa</a></td>

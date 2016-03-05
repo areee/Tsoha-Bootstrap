@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block content %}
-
 <h1>Rekisteröidy Joka Kodin Ruokapalveluun</h1>
 
 {% if message %}
@@ -21,37 +20,44 @@
 
 <form method="post" action="{{base_path}}/signup">
 
-  <div class="form-group"> <label class="control-label">Käyttäjätunnus</label>
+  <div class="form-group"> <label class="control-label">Käyttäjätunnus *</label>
   <input type="text" name="username" class="form-control"
   value="{{attributes.username}}"> </div>
 
-    <div class="form-group"> <label class="control-label">Salasana</label>
+    <div class="form-group"> <label class="control-label">Salasana *</label>
     <input type="password" class="form-control" name="password"
     value="{{attributes.password}}"> </div>
 
-    <div class="form-group"> <label>Salasana uudelleen</label> <input
+    <div class="form-group"> <label>Salasana uudelleen *</label> <input
     type="password" class="form-control" name="password_verification"
     value="{{attributes.password_verification}}"> </div>
 
-    <label class="control-label">Onko ylläpitäjä</label>
+    {% if is_chef_admin %}
+    <label class="control-label">Käyttäjätyyppi *</label>
 
-    {% if attributes.is_admin == 1 %}
-
-    <div class="radio"> <label> <input type="radio" name="is_admin"
-    id="optionsRadios1" value="false"> ei </label> </div>
-
-    <div class="radio"> <label> <input type="radio" name="is_admin"
-    id="optionsRadios2" value="true" checked> kyllä </label> </div>
-
+    <div class="radio">
+        {% if attributes.is_admin %}
+      <label> <input type="radio" name="is_admin"
+    id="optionsRadios1" value="false"> normaali käyttäjä </label>
+    {% elseif attributes.is_admin == null %}
     {% else %}
-
-    <div class="radio"> <label> <input type="radio" name="is_admin"
-    id="optionsRadios1" value="false" checked> ei </label> </div>
-
-    <div class="radio"> <label> <input type="radio" name="is_admin"
-    id="optionsRadios2" value="true"> kyllä </label> </div>
-
+    <label> <input type="radio" name="is_admin"
+    id="optionsRadios1" value="false" checked> normaali käyttäjä </label>
     {% endif %}
+  </div>
+
+    <div class="radio">
+      {% if attributes.is_admin %}
+      <label> <input type="radio" name="is_admin"
+    id="optionsRadios2" value="true" checked> ylläpitäjä </label>
+    {% else %}
+    <label> <input type="radio" name="is_admin"
+    id="optionsRadios1" value="true"> ylläpitäjä </label>
+    {% endif %}
+  </div>
+  {% else %}
+  <input type="hidden" name="is_admin" value="false">
+  {% endif %}
 
     <button type="submit" class="btn btn-primary">Rekisteröidy</button>
 </form>

@@ -19,20 +19,15 @@ class BaseModel {
     public function errors() {
         // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
         $errors = array();
-
 //        $errors = array_merge($errors, $this->validators);
-
         foreach ($this->validators as $validator) {
             // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
             // käy läpi validators-taulukon ja kutsuu sen sisältämiä validointimetodeja niiden nimellä
-
             $metodin_nimi = $validator;
             $error = $this->{$metodin_nimi}();
-
             $errors = array_merge($errors, $error);
         }
 //        $errors = array_merge($errors, $validator);
-
         return $errors;
     }
 

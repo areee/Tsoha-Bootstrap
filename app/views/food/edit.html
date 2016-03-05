@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>Muokkaa raaka-ainetta "{{attributes.name}}"</h1>
+<h1>Muokkaa raaka-ainetta {{attributes.name}}</h1>
 
 {% if errors %}
 <div class="alert alert-danger">
@@ -14,133 +14,83 @@
 
 <form method="post" action="{{base_path}}/food/{{attributes.id}}/edit">
     <div class="form-group">
-        <label class="control-label">Nimi</label>
-        <input type="text" name="name" class="form-control" value="{{attributes.name}}">
+        <label class="control-label">Nimi *</label>
+        <input type="text" name="name" class="form-control"
+        value="{{attributes.name}}">
     </div>
-    
+
     <div class="form-group">
         <label class="control-label">Kuvaus</label>
-        <input type="text" name="description" class="form-control" value="{{attributes.description}}">
+        <input type="text" name="description" class="form-control"
+        value="{{attributes.description}}">
     </div>
 
-    {% if attributes.unit == "kilogrammaa" %}
-    <div class="form-group">
-        <label class="control-label">Määrä</label>
-        <input type="number" min="0" step="0.001" name="volume" class="form-control" value="{{attributes.volume}}">
-    </div>
+    <div class="form-group"> <label class="control-label">Määrä *</label>
 
-    {% elseif attributes.unit == "litraa" %}
+      {% if attributes.unit == "kilogrammaa" %} <input type="number" min="0"
+      step="0.001" name="volume" class="form-control"
+      value="{{attributes.volume}}">
 
-    <div class="form-group">
-        <label class="control-label">Määrä</label>
-        <input type="number" min="0" step="0.25" name="volume" class="form-control" value="{{attributes.volume}}">
-    </div>
+      {% elseif attributes.unit == "litraa" %} <input type="number" min="0"
+      step="0.25" name="volume" class="form-control"
+      value="{{attributes.volume}}">
 
-    {% elseif attributes.unit == "kappaletta" %}
+      {% elseif attributes.unit == "kappaletta" %} <input type="number"  min="0"
+      step="0.5" name="volume" class="form-control"
+      value="{{attributes.volume}}">
 
-    <div class="form-group">
-        <label class="control-label">Määrä</label>
-        <input type="number"  min="0" step="0.5" name="volume" class="form-control" value="{{attributes.volume}}">
-    </div>
+      {% else %} <input type="number"  min="0" step="any" name="volume"
+      class="form-control" value="{{attributes.volume}}"> {% endif %} </div>
 
-    {% else %}
+      <label class="control-label">Yksikkö *</label>
 
-    <div class="form-group">
-        <label class="control-label">Määrä</label>
-        <input type="number"  min="0" step="any" name="volume" class="form-control" value="{{attributes.volume}}">
-    </div>
-
-    {% endif %}
-
-    {% if attributes.unit == "kilogrammaa" %}
-    <div class="radio">
+      <div class="radio">
+        {% if attributes.unit == "kilogrammaa" %}
         <label>
-            <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa" checked>
-            kilogrammaa (kg)
+          <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa"
+           checked>kilogrammaa (kg)
         </label>
-    </div>
-
-    <div class="radio">
+        {% elseif attributes.unit == null %}
         <label>
+          <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa"
+           checked>kilogrammaa (kg)
+        </label>
+        {% else %}
+        <label>
+          <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa">
+          kilogrammaa (kg)
+        </label>
+        {% endif %}
+      </div>
+
+      <div class="radio">
+        {% if attributes.unit == "litraa" %}
+        <label>
+          <input type="radio" name="unit" id="optionsRadios2" value="litraa"
+          checked>litraa (l)
+          </label>
+          {% else %}
+          <label>
             <input type="radio" name="unit" id="optionsRadios2" value="litraa">
             litraa (l)
-        </label>
-    </div>
+          </label>
+          {% endif %}
+        </div>
 
-    <div class="radio">
-        <label>
-            <input type="radio" name="unit" id="optionsRadios3" value="kappaletta">
-            kappaletta (kpl)
-        </label>
-    </div>
-
-    {% elseif attributes.unit == "litraa" %}
-    <div class="radio">
-        <label>
-            <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa">
-            kilogrammaa (kg)
-        </label>
-    </div>
-
-    <div class="radio">
-        <label>
-            <input type="radio" name="unit" id="optionsRadios2" value="litraa" checked>
-            litraa (l)
-        </label>
-    </div>
-
-    <div class="radio">
-        <label>
-            <input type="radio" name="unit" id="optionsRadios3" value="kappaletta">
-            kappaletta (kpl)
-        </label>
-    </div>
-
-    {% elseif attributes.unit == "kappaletta" %}
-    <div class="radio">
-        <label>
-            <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa">
-            kilogrammaa (kg)
-        </label>
-    </div>
-
-    <div class="radio">
-        <label>
-            <input type="radio" name="unit" id="optionsRadios2" value="litraa">
-            litraa (l)
-        </label>
-    </div>
-
-    <div class="radio">
-        <label>
-            <input type="radio" name="unit" id="optionsRadios3" value="kappaletta" checked>
-            kappaletta (kpl)
-        </label>
-    </div>
-
-    {% else %}
-
-    <div class="radio">
-        <label>
-            <input type="radio" name="unit" id="optionsRadios1" value="kilogrammaa">
-            kilogrammaa (kg)
-        </label>
-    </div>
-
-    <div class="radio">
-        <label>
-            <input type="radio" name="unit" id="optionsRadios2" value="litraa">
-            litraa (l)
-        </label>
-    </div>
-
-    <div class="radio">
-        <label>
-            <input type="radio" name="unit" id="optionsRadios3" value="kappaletta">
-            kappaletta (kpl)
-        </label>
-    </div>
-    {% endif %}
+      <div class="radio">
+        {% if attributes.unit == "kappaletta" %}
+          <label>
+              <input type="radio" name="unit" id="optionsRadios3" value="kappaletta" checked>
+              kappaletta (kpl)
+          </label>
+          {% else %}
+              <label>
+                  <input type="radio" name="unit" id="optionsRadios3"
+                  value="kappaletta">
+                  kappaletta (kpl)
+              </label>
+              {% endif %}
+            </div>
 
     <div class="form-group">
         <button type="submit" class="btn btn-primary">Päivitä</button>

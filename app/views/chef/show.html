@@ -9,7 +9,7 @@
 
 {% import "macros/forms.html" as forms %}
 
-<h1>Kokkailijan "{{chef.username}}" tiedot</h1>
+<h1>Kokkailijan {{chef.username}} tiedot</h1>
 
 <p>
     {{forms.destroy_button("#{base_path}/chef/#{chef.id}/destroy")}}
@@ -19,11 +19,13 @@
 <ul>
     <li><strong>Salasana: </strong>{{chef.password}}</li>
 
-    {% if chef.is_admin %}
-    <li><strong>Ylläpitäjä: </strong>kyllä</li>
-    {% else %}
-    <li><strong>Ylläpitäjä: </strong>ei</li>
-    {% endif %}
+    <li><strong>Käyttäjätyyppi: </strong>
+      {% if chef.is_admin %}
+      ylläpitäjä
+      {% else %}
+      normaali käyttäjä
+      {% endif %}
+    </li>
     <li><strong>Lisätty: </strong>{{chef.added}}</li>
     <li><strong>Muokattu: </strong>{{chef.updated}}</li>
 

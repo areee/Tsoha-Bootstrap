@@ -19,8 +19,8 @@ class ChefController extends BaseController {
 
   // käyttäjän lisäys:
   public static function store() {
-       self::check_logged_in();
-       self::check_is_admin();
+      //  self::check_logged_in();
+      //  self::check_is_admin();
       $params = $_POST;
       $attributes = array(
           'username' => $params['username'],
@@ -42,8 +42,8 @@ class ChefController extends BaseController {
   }
 
   public static function create() {
-      self::check_logged_in();
-      self::check_is_admin();
+      // self::check_logged_in();
+      // self::check_is_admin();
       View::make('chef/new.html');
   }
 
