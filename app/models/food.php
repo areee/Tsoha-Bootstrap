@@ -6,8 +6,8 @@ class Food extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name', 'validate_volume',
-            'validate_unit');
+        $this->validators = array('validate_name', 'validate_description',
+        'validate_volume');
     }
 
     public static function all() {
@@ -90,38 +90,51 @@ class Food extends BaseModel {
     }
 
     // validointimetodit:
+
+    public function validate_string_length($method, $required, $string, $length) {
+        $errors = array();
+        if ($required == true && ($string == '' || $string == null)) {
+            $errors[] = $method . ' ei saa olla tyhjä!';
+        }
+        if ($required == true && $length < 3) {
+          $errors[] = $method . ' "' . $string .
+                  '": pituuden tulee olla vähintään kolme merkkiä!';
+        }
+        if(preg_match("/[^A-Za-z0-9åäöÅÄÖ]/",$string)){
+          $errors[] = 'Kentässä ' . $method . ' on kiellettyjä merkkejä!';
+        }
+
+        return $errors;
+    }
+
     public function validate_name() {
         $errors = array();
         $validate_string_length = 'validate_string_length';
         $errors = $this->{$validate_string_length}
-                ($this->name, strlen($this->name));
+                ('Nimi', true, $this->name, strlen($this->name));
         return $errors;
     }
 
-    public function validate_string_length($string, $length) {
+    public function validate_description() {
         $errors = array();
-        if ($string == '' || $string == null) {
-            $errors[] = 'Merkkijono ei saa olla tyhjä!';
-        }
-        if ($length < 3) {
-            $errors[] = 'Merkkijonon "' . $string .
-                    '" pituuden tulee olla vähintään kolme merkkiä!';
-        }
+        $validate_string_length = 'validate_string_length';
+        $errors = $this->{$validate_string_length}
+                ('Kuvaus', false, $this->description, strlen($this->description));
         return $errors;
     }
 
-    public function validate_number($number) {
+    public function validate_number($method, $number) {
         $errors = array();
         if ($number == '' || $number == null) {
-            $errors[] = 'Määrä ei saa olla tyhjä!';
+            $errors[] = $method . ' ei saa olla tyhjä!';
         }
 
         if (!is_numeric($number)) {
-            $errors[] = 'Määrän tulee olla numero!';
+            $errors[] = $method . 'n tulee olla numero!';
         }
 
         if ($number < 0) {
-            $errors[] = 'Määrän tulee olla vähintään nolla!';
+            $errors[] = $method . 'n tulee olla vähintään nolla!';
         }
         return $errors;
     }
@@ -129,17 +142,7 @@ class Food extends BaseModel {
     public function validate_volume() {
         $errors = array();
         $validate_number = 'validate_number';
-        $errors = $this->{$validate_number}($this->volume);
+        $errors = $this->{$validate_number}('Määrä', $this->volume);
         return $errors;
     }
-
-    // toistaiseksi tarpeeton:
-    public function validate_unit() {
-        $errors = array();
-        if ($this->unit == '' || $this->unit == null) {
-            $errors[] = 'Yksikkö tulee olla valittuna!';
-        }
-        return $errors;
-    }
-
 }

@@ -11,7 +11,8 @@ class FoodController extends BaseController {
     public static function show($id) {
         self::check_logged_in();
         $food = Food::find($id);
-        View::make('food/show.html', array('food' => $food));
+        $chef = Chef::find($food->chef_id);
+        View::make('food/show.html', array('food' => $food, 'chef'=> $chef));
     }
 
     // raaka-aineen lisäys:

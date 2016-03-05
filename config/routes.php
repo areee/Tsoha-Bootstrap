@@ -10,7 +10,7 @@ $routes->get('/food', function() {
     FoodController::index();
 });
 
-$routes->post('/food', function() {
+$routes->post('/food/new', function() {
     FoodController::store();
 });
 
