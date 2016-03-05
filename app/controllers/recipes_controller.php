@@ -5,14 +5,15 @@ class RecipeController extends BaseController {
     public static function index() {
         self::check_logged_in();
         $recipes = Recipe::all();
-        
+
         View::make('recipe/index.html', array('recipes' => $recipes));
     }
 
     public static function show($id) {
         self::check_logged_in();
         $recipe = Recipe::find($id);
-        View::make('recipe/show.html', array('recipe' => $recipe));
+        $chef = Chef::find($recipe->chef_id);
+        View::make('recipe/show.html', array('recipe' => $recipe, 'chef'=> $chef));
     }
 
     // reseptin lisäys:

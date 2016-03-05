@@ -8,7 +8,7 @@
 {% endif %}
 
 {% import "macros/forms.html" as forms %}
-<h1>Reseptin "{{recipe.name}}" tiedot</h1>
+<h1>Reseptin {{recipe.name}} tiedot</h1>
 <i>{{recipe.description}}</i>
 
 <p>
@@ -17,19 +17,21 @@
 </p>
 
 <p><strong>Annoskoko: </strong>{{recipe.portions}}</p>
-<p><strong>Lisääjä: </strong>{{user_logged_in.username}}</p>
+<p><strong>Lisääjä: </strong><a href="{{base_path}}/chef/{{chef.id}}">{{chef.username}}</a></p>
+<p><strong>Reseptin lähde: </strong>{{recipe.source}}</p>
 <p><strong>Lisätty: </strong>{{recipe.added}}</p>
 <p><strong>Muokattu viimeksi: </strong>{{recipe.updated}}</p>
-<p><strong>Reseptin lähde: </strong>{{recipe.source}}</p>
-<p><strong>Lisääjä: </strong>{{recipe.chef_id}}</p>
+
 
 <h3>Raaka-aineet</h3>
 
+<!--tähän reseptin raaka-aineet ja niiden määrät sekä yksiköt-->
 <!--tämä toiminto vielä pahasti kesken-->
-<p>
+
+<!-- <p>
     {{recipe.volume}}
     {{recipe.unit}}
-</p>
+</p> -->
 
 <!--{% for volume in recipe.volume %}-->
 <!--{% for unit in recipe.unit %}-->

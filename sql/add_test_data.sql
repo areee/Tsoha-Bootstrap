@@ -42,7 +42,7 @@ INSERT INTO Food (name,volume,unit,description,chef_id,added,updated) VALUES
 INSERT INTO Recipe
 (name,instructions,source,portions,description,chef_id,added,updated) VALUES
 ('Suklaapirtelö','Paloittele jäätelö ja siivilöi kaakaojauhe sen päälle. Sekoita
-kaikki ainekset tasaiseksi tehoä tai sauvasekoittimella. Tarjoa pirtelö
+kaikki ainekset tasaiseksi teho- tai sauvasekoittimella. Tarjoa pirtelö
 korkeista laseista.','Pikku kokki keittiössä -kirja',4,'Helpolla
 hyvää!',2,'2016-02-29','2016-02-29');
 
