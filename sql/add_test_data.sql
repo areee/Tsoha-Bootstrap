@@ -39,11 +39,10 @@ tölkki',2,NOW(),NOW());
 INSERT INTO Food (name,volume,unit,description,chef_id,added,updated) VALUES
 ('Kevytmaito',1,'litraa','Kotimaista 1l kevytmaito',2,NOW(),NOW());
 
-INSERT INTO Recipe
-(name,instructions,source,portions,description,chef_id,added,updated) VALUES
-('Suklaapirtelö','Paloittele jäätelö ja siivilöi kaakaojauhe sen päälle. Sekoita
-kaikki ainekset tasaiseksi teho- tai sauvasekoittimella. Tarjoa pirtelö
-korkeista laseista.','Pikku kokki keittiössä -kirja',4,'Helpolla
+INSERT INTO Recipe (name,instructions,source,portions,description,chef_id,added,updated) VALUES
+('Suklaapirtelö',E'Paloittele jäätelö ja siivilöi kaakaojauhe sen päälle.
+  Sekoita kaikki ainekset tasaiseksi teho- tai sauvasekoittimella.
+  Tarjoa pirtelö korkeista laseista.','Pikku kokki keittiössä -kirja',4,'Helpolla
 hyvää!',2,'2016-02-29','2016-02-29');
 
 INSERT INTO Recipe

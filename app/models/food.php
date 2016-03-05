@@ -89,6 +89,40 @@ class Food extends BaseModel {
         $query->execute(array('id' => $this->id));
     }
 
+    public static function find_by_recipe_id($id){
+        $query = DB::connection()->prepare(
+        "SELECT * FROM RecipeFood WHERE recipe_id = :id");
+        $query->execute(array('id' => $id));
+
+        $rows = $query->fetchAll();
+        $foods = array();
+
+        foreach ($rows as $row) {
+            $food = self::find_food_by_id($row['food_id']);
+            $foods[] = self::new_food_from_row($id, $row, $food);
+        }
+        return $foods;
+    }
+
+    public static function find_food_by_id($id){
+        $query = DB::connection()->prepare(
+        "SELECT * FROM Food WHERE id = :id LIMIT 1");
+        $query->execute(array('id' => $id));
+        $food = $query->fetch();
+        return $food;
+    }
+
+    public static function new_food_from_row($id, $row, $food)
+    {
+        return new Food(array(
+            'food_id' => $row['food_id'],
+            'recipe_id' => $id,
+            'name' => $food['name'],
+            'volume' => $row['volume'],
+            'unit' => $row['unit']
+        ));
+    }
+
     // validointimetodit:
 
     public function validate_string_length($method, $required, $string, $length) {

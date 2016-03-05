@@ -5,7 +5,6 @@ class RecipeController extends BaseController {
     public static function index() {
         self::check_logged_in();
         $recipes = Recipe::all();
-
         View::make('recipe/index.html', array('recipes' => $recipes));
     }
 
@@ -13,7 +12,8 @@ class RecipeController extends BaseController {
         self::check_logged_in();
         $recipe = Recipe::find($id);
         $chef = Chef::find($recipe->chef_id);
-        View::make('recipe/show.html', array('recipe' => $recipe, 'chef'=> $chef));
+        $foods = Food::find_by_recipe_id($id);
+        View::make('recipe/show.html', array('recipe' => $recipe, 'chef'=> $chef, 'foods'=> $foods));
     }
 
     // reseptin lisäys:
@@ -25,8 +25,6 @@ class RecipeController extends BaseController {
         $attributes = array(
             'name' => $params['name'],
             'food' => array(), //testaa, toimiiko!
-//            'volume' => $params['volume'],
-//            'unit' => $params['unit'],
             'instructions' => $params['instructions'],
             'source' => $params['source'],
             'portions' => $params['portions'],
@@ -73,8 +71,6 @@ class RecipeController extends BaseController {
         $attributes = array(
             'id' => $id,
             'name' => $params['name'],
-//            'volume' => $params['volume'],
-//            'unit' => $params['unit'],
             'instructions' => $params['instructions'],
             'source' => $params['source'],
             'portions' => $params['portions'],
@@ -88,7 +84,6 @@ class RecipeController extends BaseController {
             View::make('recipe/edit.html', array('errors' => $errors, 'attributes' => $attributes));
         } else {
             $recipe->update();
-
             Redirect::to('/recipe/' . $recipe->id, array('message' => 'Resepti on päivitetty onnistuneesti!'));
         }
     }
@@ -99,7 +94,6 @@ class RecipeController extends BaseController {
         self::check_is_admin();
         $recipe = new Recipe(array('id' => $id));
         $recipe->destroy();
-
         Redirect::to('/recipe', array('message' => 'Resepti on poistettu onnistuneesti!'));
     }
 

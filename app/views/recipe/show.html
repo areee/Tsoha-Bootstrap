@@ -25,28 +25,19 @@
 
 <h3>Raaka-aineet</h3>
 
-<!--tähän reseptin raaka-aineet ja niiden määrät sekä yksiköt-->
-<!--tämä toiminto vielä pahasti kesken-->
-
-<!-- <p>
-    {{recipe.volume}}
-    {{recipe.unit}}
-</p> -->
-
-<!--{% for volume in recipe.volume %}-->
-<!--{% for unit in recipe.unit %}-->
-<!--<ul class="list-inline">
-    <li>{{volume}}</li>
-</ul>
-{% endfor %}-->
-<!--{% endfor %}-->
-
-
+<dl class="dl-horizontal">
+  {% for food in foods %}
+  <dt>{{food.volume}} {{food.unit}}</dt>
+  <dd>{{food.name}} </dd>
+  {% endfor %}
+</dl>
 
 <h3>Ohjeet</h3>
 
 <p>
-    {{recipe.instructions}}
+    {{recipe.instructions|nl2br}}
 </p>
+
+
 
 {% endblock %}
