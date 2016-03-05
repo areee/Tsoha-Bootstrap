@@ -80,8 +80,9 @@ class Recipe extends BaseModel {
     public function update() {
         $query = DB::connection()->prepare(
                 'UPDATE Recipe SET name = :name,'
-                . ' instructions = :instructions,'
-                . 'source = :source, portions = :portions,'
+                . 'instructions = :instructions,'
+                . 'source = :source,'
+                . 'portions = :portions,'
                 . 'description = :description,'
                 . 'updated = CURRENT_DATE WHERE id = :id');
         $query->execute(array(

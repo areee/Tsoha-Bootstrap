@@ -38,7 +38,7 @@ $routes->get('/recipe', function() {
     RecipeController::index();
 });
 
-$routes->post('/recipe', function() {
+$routes->post('/recipe/new', function() {
     RecipeController::store();
 });
 

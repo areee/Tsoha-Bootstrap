@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
 
 {% if message %}
 <div class="alert alert-success">
@@ -7,13 +8,11 @@
 </div>
 {% endif %}
 
-{% import "macros/forms.html" as forms %}
-
 <h1>Raaka-aineen {{food.name}} tiedot</h1>
 <i>{{food.description}}</i>
 
 <p>
-    {{forms.destroy_button("#{base_path}/food/#{food.id}/destroy")}}
+    {{forms.destroy_button("#{base_path}/food/#{food.id}/destroy","raaka-aine")}}
     <a href="{{base_path}}/food/{{food.id}}/edit" class="btn btn-default">Muokkaa</a>
 </p>
 

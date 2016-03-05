@@ -12,7 +12,7 @@
 </div>
 {% endif %}
 
-<form method="post" action="{{base_path}}/recipe">
+<form method="post" action="{{base_path}}/recipe/new">
     <div class="form-group">
         <label class="control-label">Nimi</label>
         <input type="text" name="name" class="form-control" value="{{attributes.name}}">
@@ -26,27 +26,69 @@
     <input type="number" name="portions" class="form-control"
     value="{{attributes.portions}}"> </div>
 
-    <!-- <label class="control-label">Raaka-aineet</label>
-    <p>Tähän väliin raaka-aineet, niiden määrät + yksiköt</p> -->
+    <div class="form-group"> <label class="control-label">Reseptin lähde</label>
+    <input type="text" name="source" class="form-control"
+    value="{{attributes.source}}"> </div>
 
-    <!-- <div class="form-group"> <label>Raaka-aineet</label> <select
-    class="form-control" name="food"> {% for food in foods %} <option
-    value="{{food.id}}">{{food.name}}</option> {% endfor %} </select> </div> -->
+    <div class="form-group"> <!--form-inline-->
+      <table>
+        <tr>
+          <td>
+            <label>Määrä</label>
+          </td>
+          <td>
+            <label>Yksikkö</label>
+          </td>
+          <td>
+            <label>Raaka-aine</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <!-- <input name="quantity[0]" class="form-control" type="text"> -->
+            <input type="text" name="volume[0]" class="form-control" placeholder="Määrä">
+          </td>
+          <td>
+            <!-- <input name="ingredient[0]" class="form-control" type="text"> -->
+            <input type="text" name="unit[0]" class="form-control" placeholder="Yksikkö">
+          </td>
+          <td>
+            <!-- <input name="ingredient[0]" class="form-control" type="text"> -->
+            <div id="template">
+              <select class="form-control" name="food[0]">
+                {% for food in foods %}
+                <option value="{{food.id}}">{{food.name}}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </td>
+        </tr>
+      </table>
 
-    <!--testaa, toimiiko ao. div!-->
-    <div class="form-group"> <label>Raaka-aineet</label> <select
-    class="form-control" name="food[]" multiple=""> {% for food in foods %}
-    <option value="{{food.id}}">{{food.name}}</option> {% endfor %} </select>
+      <!-- <input type="text" name="volume" class="form-control" placeholder="Määrä"
+      value="{{attributes.volume}}"> -->
+      <!-- <input type="text" name="unit" class="form-control" placeholder="Yksikkö"
+      value="{{attributes.unit}}"> -->
+
+      <!-- <select class="form-control" name="food">
+        {% for food in foods %}
+        <option value="{{food.id}}">{{food.name}}</option>
+        {% endfor %}
+      </select> -->
     </div>
+    <script>var indexCountForFood = 0;</script>
+    <span id="newIngredient"></span>
 
+    <div class="form-group">
+      <button type="button" onclick="newInput(1)"
+      class="btn btn-success">Lisää raaka-aine</button>
+    </div>
 
     <div class="form-group"> <label class="control-label">Ohjeet</label>
     <textarea name="instructions" class="form-control"
     rows="10">{{attributes.instructions}}</textarea> </div>
 
-    <div class="form-group"> <label class="control-label">Reseptin lähde</label>
-    <input type="text" name="source" class="form-control"
-    value="{{attributes.source}}"> </div>
-
     <div class="form-group"> <button type="submit" class="btn
-    btn-primary">Lisää</button> </div> </form> {% endblock %}
+    btn-primary">Tallenna</button> </div>
+
+  </form> {% endblock %}

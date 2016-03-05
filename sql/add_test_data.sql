@@ -47,7 +47,7 @@ hyvää!',2,'2016-02-29','2016-02-29');
 
 INSERT INTO Recipe
 (name,instructions,source,portions,description,chef_id,added,updated) VALUES
-('Paistetut perunat','Paista perunat rasvassa pannulla. Nauti!','oma
+('Paistetut perunat',E'Paista perunat rasvassa pannulla. \nNauti!','oma
 pää',1,'Maistuva',1,NOW(),NOW());
 
 INSERT INTO RecipeFood (recipe_id,food_id,volume,unit,added,updated) VALUES
