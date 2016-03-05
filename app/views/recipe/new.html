@@ -45,16 +45,14 @@
         </tr>
         <tr>
           <td>
-            <!-- <input name="quantity[0]" class="form-control" type="text"> -->
             <input type="text" name="volume[0]" class="form-control" placeholder="Määrä">
           </td>
           <td>
-            <!-- <input name="ingredient[0]" class="form-control" type="text"> -->
             <input type="text" name="unit[0]" class="form-control" placeholder="Yksikkö">
           </td>
           <td>
-            <!-- <input name="ingredient[0]" class="form-control" type="text"> -->
-            <div id="template">
+            <!-- <input type="text" name="food[0]" class="form-control" placeholder="Raaka-aine"> -->
+            <div id="food_section">
               <select class="form-control" name="food[0]">
                 {% for food in foods %}
                 <option value="{{food.id}}">{{food.name}}</option>
@@ -64,20 +62,9 @@
           </td>
         </tr>
       </table>
-
-      <!-- <input type="text" name="volume" class="form-control" placeholder="Määrä"
-      value="{{attributes.volume}}"> -->
-      <!-- <input type="text" name="unit" class="form-control" placeholder="Yksikkö"
-      value="{{attributes.unit}}"> -->
-
-      <!-- <select class="form-control" name="food">
-        {% for food in foods %}
-        <option value="{{food.id}}">{{food.name}}</option>
-        {% endfor %}
-      </select> -->
     </div>
     <script>var indexCountForFood = 0;</script>
-    <span id="newIngredient"></span>
+    <span id="newFood"></span>
 
     <div class="form-group">
       <button type="button" onclick="newInput(1)"

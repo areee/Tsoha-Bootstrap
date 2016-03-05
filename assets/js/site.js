@@ -67,26 +67,18 @@ function newInput(option) {
     tableElement.appendChild(tr);
 
 
-    var foodElement = document.getElementById("newIngredient");
+    var foodElement = document.getElementById("newFood");
 
     foodElement.appendChild(tableElement);
 }
 
 // $(function() {
-//         var scntDiv = $('#p_scents');
-//         var i = $('#p_scents p').size() + 1;
+//         var foodDiv = $('#food_section');
+//         var i = $('#food_section select').size()-1 + 1;
 //
-//         $('#addScnt').live('click', function() {
-//                 $('<p><label for="p_scnts"><input type="text" id="p_scnt" size="20" name="p_scnt_' + i +'" value="" placeholder="Input Value" /></label> <a href="#" id="remScnt">Remove</a></p>').appendTo(scntDiv);
+//         $('#addFood').live('click', function() {
+//                 $('<select class="form-control" name="food['+i+']">{% for food in foods %}<option value="{{food.id}}">{{food.name}}</option>{% endfor %}</select>').appendTo(foodDiv);
 //                 i++;
-//                 return false;
-//         });
-//
-//         $('#remScnt').live('click', function() {
-//                 if( i > 2 ) {
-//                         $(this).parents('p').remove();
-//                         i--;
-//                 }
 //                 return false;
 //         });
 // });
