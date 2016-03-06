@@ -21,9 +21,11 @@ function newInput(option) {
     var td1 = document.createElement("td");
     var td2 = document.createElement("td");
 
-    tableElement.setAttribute("class", 'form-group');
+    tableElement.setAttribute("class", 'table');
 
-    volumeElement.setAttribute("type", 'text');
+    volumeElement.setAttribute("type", 'number');
+    volumeElement.setAttribute("min", '0');
+    volumeElement.setAttribute("step", 'any');
     unitElement.setAttribute("type", 'text');
 
     var volumeFieldName = "volume";

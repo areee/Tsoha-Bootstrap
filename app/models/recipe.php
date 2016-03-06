@@ -8,7 +8,7 @@ class Recipe extends BaseModel {
     public function __construct($attributes) {
         parent::__construct($attributes);
         $this->validators = array('validate_name','validate_instructions',
-        'validate_source','validate_portions');
+        'validate_source','validate_portions','validate_description');
     }
 
     public static function all() {
@@ -63,7 +63,7 @@ class Recipe extends BaseModel {
                 . 'added, updated)'
                 . 'VALUES (:name, :instructions, :source, :portions, :description,'
                 . ':chef_id, CURRENT_DATE, CURRENT_DATE)'
-                . ' RETURNING id');
+                . 'RETURNING id');
         $query->execute(array(
             'name' => $this->name,
             'instructions' => $this->instructions,
@@ -73,8 +73,8 @@ class Recipe extends BaseModel {
             'chef_id' => $this->chef_id));
 
         $row = $query->fetch();
-
         $this->id = $row['id'];
+        return $this->id;
     }
 
     public function update() {
@@ -111,7 +111,7 @@ class Recipe extends BaseModel {
           $errors[] = $method . ' "' . $string .
           '": pituuden tulee olla vähintään kolme merkkiä!';
         }
-        if(preg_match("/[^A-Za-z0-9åäöÅÄÖ]/",$string)){
+        if(preg_match("/[^A-Za-z0-9åäöÅÄÖ\!?+\.\-\/ ]/",$string)){
           $errors[] = 'Kentässä "' . $method . '" on kiellettyjä merkkejä!';
         }
         return $errors;
@@ -138,6 +138,14 @@ class Recipe extends BaseModel {
         $validate_string_length = 'validate_string_length';
         $errors = $this->{$validate_string_length}
                 ('Lähde', true, $this->source, strlen($this->source));
+        return $errors;
+    }
+
+    public function validate_description() {
+        $errors = array();
+        $validate_string_length = 'validate_string_length';
+        $errors = $this->{$validate_string_length}
+                ('Kuvaus', false, $this->description, strlen($this->description));
         return $errors;
     }
 

@@ -134,7 +134,7 @@ class Food extends BaseModel {
           $errors[] = $method . ' "' . $string .
           '": pituuden tulee olla vähintään kolme merkkiä!';
         }
-        if(preg_match("/[^A-Za-z0-9åäöÅÄÖ\!?-_@€&()[]=+\/ ]/",$string)){
+        if(preg_match("/[^A-Za-z0-9åäöÅÄÖ\!?+\.\-\/ ]/",$string)){
           $errors[] = 'Kentässä "' . $method . '" on kiellettyjä merkkejä!';
         }
         return $errors;
