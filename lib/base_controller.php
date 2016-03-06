@@ -3,7 +3,6 @@
 class BaseController {
 
     public static function get_user_logged_in() {
-        // Toteuta kirjautuneen käyttäjän haku tähän
         // Katsotaan onko user-avain sessiossa
         if (isset($_SESSION['chef'])) {
             $chef_id = $_SESSION['chef'];
@@ -17,9 +16,6 @@ class BaseController {
     }
 
     public static function check_logged_in() {
-        // Toteuta kirjautumisen tarkistus tähän.
-        // Jos käyttäjä ei ole kirjautunut sisään, ohjaa hänet toiselle sivulle (esim. kirjautumissivulle).
-
         if (!isset($_SESSION['chef'])) {
             Redirect::to('/login', array('message' => 'Kirjaudu ensin sisään!'));
         }
@@ -33,7 +29,8 @@ class BaseController {
             $is_admin = $chef->is_admin;
 
             if (!$is_admin) {
-                Redirect::to('/', array('message' => 'Toiminto epäonnistui, sillä et ole ylläpitäjä!'));
+                Redirect::to('/', array(
+                    'message' => 'Toiminto epäonnistui, sillä et ole ylläpitäjä!'));
             }
         } else {
             Redirect::to('/login', array('message' => 'Kirjaudu ensin sisään!'));
@@ -41,7 +38,6 @@ class BaseController {
     }
 
     public static function get_admin_status() {
-        // Toteuta kirjautuneen käyttäjän haku tähän
         // Katsotaan onko user-avain sessiossa
         if (isset($_SESSION['chef'])) {
             $chef_id = $_SESSION['chef'];

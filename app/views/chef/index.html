@@ -32,15 +32,16 @@
             <td>{{chef.password}}</td>
 
             <td>
-              {% if chef.is_admin %}
-              ylläpitäjä
-              {% else %}
-              normaali käyttäjä
-              {% endif %}
+                {% if chef.is_admin %}
+                ylläpitäjä
+                {% else %}
+                normaali käyttäjä
+                {% endif %}
             </td>
             <td>{{chef.added}}</td>
             <td>{{chef.updated}}</td>
-            <td><a class="btn btn-default btn-sm" href="{{base_path}}/chef/{{chef.id}}/edit">Muokkaa</a></td>
+            <td><a class="btn btn-default btn-sm" 
+                   href="{{base_path}}/chef/{{chef.id}}/edit">Muokkaa</a></td>
         </tr>
         {% endfor %}
     </tbody>

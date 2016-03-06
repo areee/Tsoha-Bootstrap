@@ -27,7 +27,8 @@
         <label class="label label-success">riittävästi</label>
         {% endif %}
     </li>
-    <li><strong>Lisääjä: </strong><a href="{{base_path}}/chef/{{chef.id}}">{{chef.username}}</a></li>
+    <li><strong>Lisääjä: </strong><a href="{{base_path}}/chef/{{chef.id}}">
+            {{chef.username}}</a></li>
     <li><strong>Lisätty: </strong>{{food.added}}</li>
     <li><strong>Muokattu viimeksi: </strong>{{food.updated}}</li>
 

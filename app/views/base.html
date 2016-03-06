@@ -13,7 +13,8 @@
 
         {% block head %}
         <!-- Bootstrap (tyylitiedosto) -->
-        <link href="{{base_path}}/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="{{base_path}}/vendor/bootstrap/css/bootstrap.min.css" 
+              rel="stylesheet">
 
         <!-- Oma tyylitiedostomme -->
         <link href="{{base_path}}/assets/css/site.css" rel="stylesheet">
@@ -26,7 +27,8 @@
             <div class="container-fluid">
 
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigation">
+                    <button type="button" class="navbar-toggle collapsed" 
+                            data-toggle="collapse" data-target="#navigation">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -34,81 +36,85 @@
                     </button>
                     <!-- Sovelluksen nimi -->
                     {% if user_logged_in %}
-                    <a class="navbar-brand" href="{{base_path}}">Joka Kodin Ruokapalvelu</a>
+                    <a class="navbar-brand" href="{{base_path}}">
+                        Joka Kodin Ruokapalvelu</a>
                     {% else %}
-                    <a class="navbar-brand" href="{{base_path}}/login">Joka Kodin Ruokapalvelu</a>
+                    <a class="navbar-brand" href="{{base_path}}/login">
+                        Joka Kodin Ruokapalvelu</a>
                     {% endif %}
                 </div>
 
                 <div class="collapse navbar-collapse" id="navigation">
-                  {% if user_logged_in %}
+                    {% if user_logged_in %}
                     <ul class="nav navbar-nav">
                         <li role="presentation" class="dropdown">
-                          <a class=" dropdown-toggle" href="#" role="button"
-                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Ruokakomero
-                          <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-left">
-                          <li><a href="{{base_path}}/food">Raaka-aineet</a></li>
-                          <li><a href="{{base_path}}/food/new">Lisää raaka-aine</a></li>
-                        </ul>
-                      </li>
-                      </ul>
+                            <a class=" dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true">
+                                Ruokakomero
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                                <li>
+                                    <a href="{{base_path}}/food">Raaka-aineet</a>
+                                </li>
+                                <li>
+                                    <a href="{{base_path}}/food/new">
+                                        Lisää raaka-aine</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
 
-                      <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav">
                         <li role="presentation" class="dropdown">
-                          <a class=" dropdown-toggle" href="#" role="button"
-                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Reseptipankki
-                          <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-left">
-                          <li><a href="{{base_path}}/recipe">Reseptit</a></li>
-                          <li><a href="{{base_path}}/recipe/new">Lisää resepti</a></li>
-                        </ul>
-                      </li>
+                            <a class=" dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true">
+                                Reseptipankki
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                                <li>
+                                    <a href="{{base_path}}/recipe">Reseptit</a>
+                                </li>
+                                <li>
+                                    <a href="{{base_path}}/recipe/new">
+                                        Lisää resepti</a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
 
                     <ul class="nav navbar-nav">
                         {% if is_chef_admin %}
                         <li role="presentation" class="dropdown">
-                          <a class=" dropdown-toggle" href="#" role="button"
-                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Kokkailijat
-                          <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-left">
-                          <li><a href="{{base_path}}/chef">Kokkailijat</a></li>
-                          <li><a href="{{base_path}}/signup">Lisää kokkailija</a></li>
-                        </ul>
-                      </li>
+                            <a class=" dropdown-toggle" href="#" role="button"
+                               data-toggle="dropdown" aria-haspopup="true">
+                                Kokkailijat
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-left">
+                                <li>
+                                    <a href="{{base_path}}/chef">Kokkailijat</a>
+                                </li>
+                                <li>
+                                    <a href="{{base_path}}/signup">
+                                        Lisää kokkailija</a>
+                                </li>
+                            </ul>
+                        </li>
                         {% endif %}
                     </ul>
 
-
-                    <!--{% if is_chef_admin %}
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{base_path}}/chef">Kokkailijat</a></li>
-                    </ul>
-                    {% endif %}-->
-
-                    <form class="navbar-form navbar-right" method="post" action="{{base_path}}/logout">
-                        <button type="submit" class="btn btn-default">Kirjaudu ulos</button>
+                    <form class="navbar-form navbar-right" method="post" 
+                          action="{{base_path}}/logout">
+                        <button type="submit" class="btn btn-default">
+                            Kirjaudu ulos</button>
                     </form>
                     {% else %}
-                    <!-- <ul class="nav navbar-nav navbar-right">
-                    <li><a href="{{base_path}}/login">Kirjaudu sisään</a></li>
-                    </ul>-->
 
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{base_path}}/signup">Rekisteröidy</a></li>
                     </ul>
-
-                    <!--<form class="navbar-form navbar-right" method="post" action="{{base_path}}/signup">
-                        <button type="submit" class="btn btn-default">Rekisteröidy</button>
-                    </form>-->
-
                     {% endif %}
                 </div>
             </div>

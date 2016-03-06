@@ -50,28 +50,20 @@ $routes->get('/recipe/:id', function($id) {
     RecipeController::show($id);
 });
 
-$routes->get('/recipe/:id/edit', function($id) {
-    RecipeController::edit($id);
-});
-$routes->post('/recipe/:id/edit', function($id) {
-    RecipeController::update($id);
-});
-
 $routes->post('/recipe/:id/destroy', function($id) {
     RecipeController::destroy($id);
 });
 
 // käyttäjien hallinta:
 $routes->get('/chef', function() {
-  ChefController::index();
-    // ChefController::index();
+    ChefController::index();
 });
 
 $routes->post('/signup', function() {
     ChefController::store();
 });
 
-$routes->get('/signup', function() { // voisi olla myös chef/new tai register
+$routes->get('/signup', function() {
     ChefController::create();
 });
 
@@ -100,12 +92,3 @@ $routes->post('/login', function() {
 $routes->post('/logout', function() {
     SessionController::logout();
 });
-
-// hiekkalaatikko testausta varten:
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-});
-
-//$routes->get('/rek', function() {
-//    HelloWorldController::register();
-//});

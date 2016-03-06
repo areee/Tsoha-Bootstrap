@@ -13,11 +13,11 @@
 
 <p>
     {{forms.destroy_button("#{base_path}/recipe/#{recipe.id}/destroy", "resepti")}}
-    <a href="{{base_path}}/recipe/{{recipe.id}}/edit" class="btn btn-default">Muokkaa</a>
 </p>
 
 <p><strong>Annoskoko: </strong>{{recipe.portions}}</p>
-<p><strong>Lisääjä: </strong><a href="{{base_path}}/chef/{{chef.id}}">{{chef.username}}</a></p>
+<p><strong>Lisääjä: </strong><a href="{{base_path}}/chef/{{chef.id}}">
+        {{chef.username}}</a></p>
 <p><strong>Reseptin lähde: </strong>{{recipe.source}}</p>
 <p><strong>Lisätty: </strong>{{recipe.added}}</p>
 <p><strong>Muokattu viimeksi: </strong>{{recipe.updated}}</p>
@@ -26,10 +26,10 @@
 <h3>Raaka-aineet</h3>
 
 <dl class="dl-horizontal">
-  {% for food in foods %}
-  <dt>{{food.volume}} {{food.unit}}</dt>
-  <dd>{{food.name}} </dd>
-  {% endfor %}
+    {% for food in foods %}
+    <dt>{{food.volume}} {{food.unit}}</dt>
+    <dd>{{food.name}} </dd>
+    {% endfor %}
 </dl>
 
 <h3>Ohjeet</h3>

@@ -4,10 +4,12 @@ class Chef extends BaseModel {
 
     public $id, $username, $password, $password_verification, $is_admin, $added, $updated;
 
-    public function __construct($attributes) { parent::__construct($attributes);
-    $this->validators = array('validate_username', 'validate_password',
-    'validate_password_verification', 'validate_passwords',
-    'validate_username_not_in_use'); }
+    public function __construct($attributes) {
+        parent::__construct($attributes);
+        $this->validators = array('validate_username', 'validate_password',
+            'validate_password_verification', 'validate_passwords',
+            'validate_username_not_in_use');
+    }
 
     public static function all() {
         $query = DB::connection()->prepare('SELECT * FROM Chef ORDER BY username ASC');
@@ -16,14 +18,7 @@ class Chef extends BaseModel {
         $chefs = array();
 
         foreach ($rows as $row) {
-            $chefs[] = new Chef(array(
-                'id' => $row['id'],
-                'username' => $row['username'],
-                'password' => $row['password'],
-                'is_admin' => $row['is_admin'],
-                'added' => $row['added'],
-                'updated' => $row['updated']
-            ));
+            $chefs[] = self::new_chef_basic($row);
         }
         return $chefs;
     }
@@ -35,14 +30,7 @@ class Chef extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $chef = new Chef(array(
-                'id' => $row['id'],
-                'username' => $row['username'],
-                'password' => $row['password'],
-                'is_admin' => $row['is_admin'],
-                'added' => $row['added'],
-                'updated' => $row['updated']
-            ));
+            $chef = self::new_chef_basic($row);
             return $chef;
         }
         return null;
@@ -81,19 +69,46 @@ class Chef extends BaseModel {
         $query->execute(array('id' => $this->id));
     }
 
-    // validointimetodit:
+    //sisään- ja uloskirjautumistoiminnot:
+    public static function authenticate($username, $password) {
+        $query = DB::connection()->prepare('SELECT * FROM Chef WHERE
+           username = :username AND password = :password LIMIT 1');
+        $query->execute(array(
+            'username' => $username,
+            'password' => $password));
+        $row = $query->fetch();
+        if ($row) {
+            // Kokkailija löytyi, palautetaan löytynyt kokkailija oliona
+            $chef = self::new_chef_basic($row);
+            return $chef;
+        }
+        // Kokkailijaa ei löytynyt, palautetaan null
+        return null;
+    }
 
+    private static function new_chef_basic($row) {
+        return new Chef(array(
+            'id' => $row['id'],
+            'username' => $row['username'],
+            'password' => $row['password'],
+            'is_admin' => $row['is_admin'],
+            'added' => $row['added'],
+            'updated' => $row['updated']
+        ));
+    }
+
+    // validointimetodit:
     public function validate_string_length($method, $required, $string, $length) {
         $errors = array();
         if ($required == true && ($string == '' || $string == null)) {
             $errors[] = $method . ' ei saa olla tyhjä!';
         }
         if ($required == true && $length < 3) {
-          $errors[] = $method . ' "' . $string .
-          '": pituuden tulee olla vähintään kolme merkkiä!';
+            $errors[] = $method . ' "' . $string .
+                    '": pituuden tulee olla vähintään kolme merkkiä!';
         }
-        if(preg_match("/[^A-Za-z0-9åäöÅÄÖ]/",$string)){
-          $errors[] = 'Kentässä "' . $method . '" on kiellettyjä merkkejä!';
+        if (preg_match("/[^A-Za-z0-9åäöÅÄÖ]/", $string)) {
+            $errors[] = 'Kentässä "' . $method . '" on kiellettyjä merkkejä!';
         }
         return $errors;
     }
@@ -124,47 +139,23 @@ class Chef extends BaseModel {
 
     public function validate_passwords() {
         $errors = array();
-        if(strcmp($this->password,$this->password_verification)!==0){
-          $errors[] = 'Salasanat eivät täsmää!';
+        if (strcmp($this->password, $this->password_verification) !== 0) {
+            $errors[] = 'Salasanat eivät täsmää!';
         }
         return $errors;
     }
 
-    public function validate_username_not_in_use(){
-      $chefs = Chef::all();
-      $chefnames = array();
-      foreach ($chefs as $chef) {
+    public function validate_username_not_in_use() {
+        $chefs = Chef::all();
+        $chefnames = array();
+        foreach ($chefs as $chef) {
             $chefnames[] = $chef->username;
         }
         $errors = array();
-      if(in_array($this->username,$chefnames)){
-        $errors[] = 'Käyttäjänimi on jo varattu, valitse jokin muu!';
-      }
-      return $errors;
-    }
-
-    //sisään- ja uloskirjautumistoiminnot:
-    public static function authenticate($username, $password) {
-        $query = DB::connection()->prepare('SELECT * FROM Chef WHERE
-           username = :username AND password = :password LIMIT 1');
-        $query->execute(array(
-          'username' => $username,
-          'password' => $password));
-        $row = $query->fetch();
-        if ($row) {
-            // Käyttäjä löytyi, palautetaan löytynyt käyttäjä oliona
-            $chef = new Chef(array(
-                'id' => $row['id'],
-                'username' => $row['username'],
-                'password' => $row['password'],
-                'is_admin' => $row['is_admin'],
-                'added' => $row['added'],
-                'updated' => $row['updated']
-            ));
-            return $chef;
+        if (in_array($this->username, $chefnames)) {
+            $errors[] = 'Käyttäjänimi on jo varattu, valitse jokin muu!';
         }
-        // Käyttäjää ei löytynyt, palautetaan null
-        return null;
+        return $errors;
     }
 
 }

@@ -20,11 +20,11 @@
     <li><strong>Salasana: </strong>{{chef.password}}</li>
 
     <li><strong>Käyttäjätyyppi: </strong>
-      {% if chef.is_admin %}
-      ylläpitäjä
-      {% else %}
-      normaali käyttäjä
-      {% endif %}
+        {% if chef.is_admin %}
+        ylläpitäjä
+        {% else %}
+        normaali käyttäjä
+        {% endif %}
     </li>
     <li><strong>Lisätty: </strong>{{chef.added}}</li>
     <li><strong>Muokattu: </strong>{{chef.updated}}</li>

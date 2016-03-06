@@ -2,92 +2,90 @@
 
 class ChefController extends BaseController {
 
-  // käyttäjien CRUD-toiminnot:
-  public static function index() {
-           self::check_logged_in();
-           self::check_is_admin();
-      $chefs = Chef::all();
-      View::make('chef/index.html', array('chefs' => $chefs));
-  }
+    // kokkailijoiden CRUD-toiminnot:
+    // kaikki käyttäjät:
+    public static function index() {
+        self::check_logged_in();
+        self::check_is_admin();
+        $chefs = Chef::all();
+        View::make('chef/index.html', array('chefs' => $chefs));
+    }
 
-  public static function show($id) {
-       self::check_logged_in();
-       self::check_is_admin();
-      $chef = Chef::find($id);
-      View::make('chef/show.html', array('chef' => $chef));
-  }
+    // näytä yksittäinen kokkailija:
+    public static function show($id) {
+        self::check_logged_in();
+        self::check_is_admin();
+        $chef = Chef::find($id);
+        View::make('chef/show.html', array('chef' => $chef));
+    }
 
-  // käyttäjän lisäys:
-  public static function store() {
-      //  self::check_logged_in();
-      //  self::check_is_admin();
-      $params = $_POST;
-      $attributes = array(
-          'username' => $params['username'],
-          'password' => $params['password'],
-          'password_verification' => $params['password_verification'],
-          'is_admin' => $params['is_admin']
-      );
+    // kokkailijan lisäys
+    // (onnistuu sekä ylläpitäjältä, että rekisteröimättömältä kokkailijalta):
+    public static function create() {
+        View::make('chef/new.html');
+    }
 
-      $chef = new Chef($attributes);
-      $errors = $chef->errors();
+    public static function store() {
+        $params = $_POST;
+        $attributes = self::get_attributes($params, null);
 
-      if (count($errors) == 0) {
-          $chef->save();
+        $chef = new Chef($attributes);
+        $errors = $chef->errors();
 
-          Redirect::to('/chef/' . $chef->id, array('message' => 'Kokkailija on lisätty kokkailijoihin!'));
-      } else {
-          View::make('chef/new.html', array('errors' => $errors, 'attributes' => $attributes));
-      }
-  }
+        if (count($errors) == 0) {
+            $chef->save();
 
-  public static function create() {
-      // self::check_logged_in();
-      // self::check_is_admin();
-      View::make('chef/new.html');
-  }
+            Redirect::to('/chef/' . $chef->id, array(
+                'message' => 'Kokkailija on lisätty kokkailijoihin!'));
+        } else {
+            View::make('chef/new.html', array(
+                'errors' => $errors, 'attributes' => $attributes));
+        }
+    }
 
-  public static function edit($id) {
-       self::check_logged_in();
-       self::check_is_admin();
-      $chef = Chef::find($id);
-      View::make('chef/edit.html', array('attributes' => $chef));
-  }
+    // kokkailijan päivitys:
+    public static function edit($id) {
+        self::check_logged_in();
+        self::check_is_admin();
+        $chef = Chef::find($id);
+        View::make('chef/edit.html', array('attributes' => $chef));
+    }
 
-  // käyttäjän päivitys:
-  public static function update($id) {
-       self::check_logged_in();
-       self::check_is_admin();
-      $params = $_POST;
+    public static function update($id) {
+        self::check_logged_in();
+        self::check_is_admin();
+        $params = $_POST;
 
-      $attributes = array(
-          'id' => $id,
-          'username' => $params['username'],
-          'password' => $params['password'],
-          'password_verification' => $params['password_verification'],
-          'is_admin' => $params['is_admin']
-      );
+        $attributes = self::get_attributes($params, $id);
 
-      $chef = new Chef($attributes);
-      // $errors = $chef->errors();
-      //
-      // if (count($errors) > 0) {
-      //     // $chef = Chef::find($id);
-      //     View::make('chef/edit.html', array('errors' => $errors, 'attributes' => $attributes));
-      // } else {
-          $chef->update();
-          Redirect::to('/chef/' . $chef->id, array('message' => 'Kokkailija on päivitetty onnistuneesti!'));
-      // }
-  }
+        $chef = new Chef($attributes);
 
-  // käyttäjän poisto:
-  public static function destroy($id) {
-       self::check_logged_in();
-       self::check_is_admin();
-      $chef = new Chef(array('id' => $id));
-      $chef->destroy();
+        // Tässä välissä olisi kokkailijan validointi. 
+        // Se on kuitenkin otettu pois käytöstä, sillä en onnistunut päivittämään
+        // kokkailijaa käyttämättä validate_username_not_in_use -funktiota.
 
-      Redirect::to('/chef', array('message' => 'Kokkailija on poistettu onnistuneesti!'));
-  }
+        $chef->update();
+        Redirect::to('/chef/' . $chef->id, array('message' => 'Kokkailija on päivitetty onnistuneesti!'));
+    }
+
+    // kokkailijan poisto:
+    public static function destroy($id) {
+        self::check_logged_in();
+        self::check_is_admin();
+        $chef = new Chef(array('id' => $id));
+        $chef->destroy();
+
+        Redirect::to('/chef', array('message' => 'Kokkailija on poistettu onnistuneesti!'));
+    }
+
+    private static function get_attributes($params, $id) {
+        $attributes = array(
+            'id' => $id,
+            'username' => $params['username'],
+            'password' => $params['password'],
+            'password_verification' => $params['password_verification'],
+            'is_admin' => $params['is_admin']);
+        return $attributes;
+    }
 
 }

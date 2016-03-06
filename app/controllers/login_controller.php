@@ -18,7 +18,8 @@ class LoginController extends BaseController {
                 . ' tai salasana!', 'username' => $params['username']));
         } else {
             $_SESSION['chef'] = $chef->id;
-            Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $chef->username . '!'));
+            Redirect::to('/', array('message' => 'Tervetuloa takaisin '
+                . $chef->username . '!'));
         }
     }
 

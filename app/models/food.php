@@ -7,26 +7,18 @@ class Food extends BaseModel {
     public function __construct($attributes) {
         parent::__construct($attributes);
         $this->validators = array('validate_name', 'validate_description',
-        'validate_volume');
+            'validate_volume');
     }
 
     public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Food ORDER BY name ASC');
+        $query = DB::connection()->prepare(
+                'SELECT * FROM Food ORDER BY name ASC');
         $query->execute();
         $rows = $query->fetchAll();
         $foods = array();
 
         foreach ($rows as $row) {
-            $foods[] = new Food(array(
-                'id' => $row['id'],
-                'name' => $row['name'],
-                'volume' => $row['volume'],
-                'unit' => $row['unit'],
-                'description' => $row['description'],
-                'chef_id' => $row['chef_id'],
-                'added' => $row['added'],
-                'updated' => $row['updated']
-            ));
+            $foods[] = self::new_food_basic($row);
         }
         return $foods;
     }
@@ -38,16 +30,7 @@ class Food extends BaseModel {
         $row = $query->fetch();
 
         if ($row) {
-            $food = new Food(array(
-                'id' => $row['id'],
-                'name' => $row['name'],
-                'volume' => $row['volume'],
-                'unit' => $row['unit'],
-                'description' => $row['description'],
-                'chef_id' => $row['chef_id'],
-                'added' => $row['added'],
-                'updated' => $row['updated']
-            ));
+            $food = self::new_food_basic($row);
             return $food;
         }
         return null;
@@ -74,7 +57,8 @@ class Food extends BaseModel {
     public function update() {
         $query = DB::connection()->prepare(
                 'UPDATE Food SET name = :name, volume = :volume, unit = :unit,'
-                . 'description = :description, updated = CURRENT_DATE WHERE id = :id');
+                . 'description = :description,'
+                . 'updated = CURRENT_DATE WHERE id = :id');
         $query->execute(array(
             'name' => $this->name,
             'volume' => $this->volume,
@@ -89,9 +73,9 @@ class Food extends BaseModel {
         $query->execute(array('id' => $this->id));
     }
 
-    public static function find_by_recipe_id($id){
+    public static function find_by_recipe_id($id) {
         $query = DB::connection()->prepare(
-        "SELECT * FROM RecipeFood WHERE recipe_id = :id");
+                "SELECT * FROM RecipeFood WHERE recipe_id = :id");
         $query->execute(array('id' => $id));
 
         $rows = $query->fetchAll();
@@ -104,16 +88,15 @@ class Food extends BaseModel {
         return $foods;
     }
 
-    public static function find_food_by_id($id){
+    private static function find_food_by_id($id) {
         $query = DB::connection()->prepare(
-        "SELECT * FROM Food WHERE id = :id LIMIT 1");
+                "SELECT * FROM Food WHERE id = :id LIMIT 1");
         $query->execute(array('id' => $id));
         $food = $query->fetch();
         return $food;
     }
 
-    public static function new_food_from_row($id, $row, $food)
-    {
+    private static function new_food_from_row($id, $row, $food) {
         return new Food(array(
             'food_id' => $row['food_id'],
             'recipe_id' => $id,
@@ -123,19 +106,31 @@ class Food extends BaseModel {
         ));
     }
 
-    // validointimetodit:
+    private static function new_food_basic($row) {
+        return new Food(array(
+            'id' => $row['id'],
+            'name' => $row['name'],
+            'volume' => $row['volume'],
+            'unit' => $row['unit'],
+            'description' => $row['description'],
+            'chef_id' => $row['chef_id'],
+            'added' => $row['added'],
+            'updated' => $row['updated']
+        ));
+    }
 
+    // validointimetodit:
     public function validate_string_length($method, $required, $string, $length) {
         $errors = array();
         if ($required == true && ($string == '' || $string == null)) {
             $errors[] = $method . ' ei saa olla tyhjä!';
         }
         if ($required == true && $length < 3) {
-          $errors[] = $method . ' "' . $string .
-          '": pituuden tulee olla vähintään kolme merkkiä!';
+            $errors[] = $method . ' "' . $string .
+                    '": pituuden tulee olla vähintään kolme merkkiä!';
         }
-        if(preg_match("/[^A-Za-z0-9åäöÅÄÖ\!?+\.\-\/ ]/",$string)){
-          $errors[] = 'Kentässä "' . $method . '" on kiellettyjä merkkejä!';
+        if (preg_match("/[^A-Za-z0-9åäöÅÄÖ\!?+\.\-\/ ]/", $string)) {
+            $errors[] = 'Kentässä "' . $method . '" on kiellettyjä merkkejä!';
         }
         return $errors;
     }
@@ -152,7 +147,8 @@ class Food extends BaseModel {
         $errors = array();
         $validate_string_length = 'validate_string_length';
         $errors = $this->{$validate_string_length}
-                ('Kuvaus', false, $this->description, strlen($this->description));
+                ('Kuvaus', false, $this->description, strlen(
+                        $this->description));
         return $errors;
     }
 
@@ -178,4 +174,5 @@ class Food extends BaseModel {
         $errors = $this->{$validate_number}('Määrä', $this->volume);
         return $errors;
     }
+
 }

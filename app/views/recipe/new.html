@@ -25,85 +25,84 @@
 <form method="post" action="{{base_path}}/recipe/new">
     <div class="form-group">
         <label class="control-label">Nimi *</label>
-        <input type="text" name="name" class="form-control" value="{{attributes.name}}">
+        <input type="text" name="name" class="form-control" 
+               value="{{attributes.name}}">
     </div>
 
     <div class="row">
-      <div class="col-md-6">
-        <div class="form-group"> <!--form-inline-->
-      <table class="table">
-        <tr>
-          <td>
-            <label>Määrä *</label>
-            <span class="help-block">luvut, jotka ovat vähintään 0.000001</span>
-          </td>
-          <td>
-            <label>Yksikkö *</label>
-            <span class="help-block">kilogrammaa, litraa tai kappaletta</span>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="number" min="0" step="any" name="volume[0]" class="form-control" placeholder="Määrä">
-          </td>
-          <td>
-            <input type="text" name="unit[0]" class="form-control" placeholder="Yksikkö">
-          </td>
-          <!-- <td> -->
-            <!-- <input type="text" name="food[0]" class="form-control" placeholder="Raaka-aine"> -->
-              <!-- <select class="form-control" name="food[0]">
-                {% for food in foods %}
-                <option value="{{food.id}}">{{food.name}}</option>
-                {% endfor %}
-              </select> -->
-          <!-- </td> -->
-        </tr>
-      </table>
-    </div>
+        <div class="col-md-6">
+            <div class="form-group"> <!--form-inline-->
+                <table class="table">
+                    <tr>
+                        <td>
+                            <label>Määrä *</label>
+                            <span class="help-block">
+                                luvut, jotka ovat vähintään 0.000001</span>
+                        </td>
+                        <td>
+                            <label>Yksikkö *</label>
+                            <span class="help-block">
+                                kilogrammaa, litraa tai kappaletta</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="number" min="0" step="any"
+                                   name="volume[0]" class="form-control"
+                                   placeholder="Määrä">
+                        </td>
+                        <td>
+                            <input type="text" name="unit[0]" 
+                                   class="form-control" placeholder="Yksikkö">
+                        </td>
+                    </tr>
+                </table>
+            </div>
 
-    <script>var indexCountForFood = 0;</script>
-    <span id="newVolume"></span>
-    <div class="form-group">
-      <button type="button" onclick="newInput(1)"
-      class="btn btn-success">Lisää rivejä</button>
-    </div>
-    </div>
+            <script>var indexCountForFood = 0;</script>
+            <span id="newVolume"></span>
+            <div class="form-group">
+                <button type="button" onclick="newInput(1)"
+                        class="btn btn-success">Lisää rivejä</button>
+            </div>
+        </div>
 
-    <div class="col-md-6">
+        <div class="col-md-6">
 
-    <div class="form-group">
-      <label>Raaka-aineet *</label>
-      <span class="help-block">Vinkki: jos raaka-aine ei ole listassa käy se
-        ensin lisäämässä <a href="{{base_path}}/food/new">Ruokakomeroon</a>!</span>
-        <span class="help-block"> Voit valita useita raaka-aineita pitämällä
-          ctrl- (PC) tai cmd- (Mac) näppäintä pohjassa. </span>
+            <div class="form-group">
+                <label>Raaka-aineet *</label>
+                <span class="help-block">
+                    Vinkki: jos raaka-aine ei ole listassa käy se ensin lisäämässä
+                    <a href="{{base_path}}/food/new">Ruokakomeroon</a>!</span>
+                <span class="help-block"> Voit valita useita raaka-aineita pitämällä
+                    ctrl- (PC) tai cmd- (Mac) näppäintä pohjassa. </span>
 
-      <select class="form-control" name="foods[]" multiple="">
-        {% for food in foods %}
-        <option value="{{food.id}}">{{food.name}}</option>
-        {% endfor %}
-      </select>
-    </div>
-    </div>
+                <select class="form-control" name="foods[]" multiple="">
+                    {% for food in foods %}
+                    <option value="{{food.id}}">{{food.name}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
     </div>
 
     <div class="form-group"> <label class="control-label">Kuvaus</label> <input
-    type="text" name="description" class="form-control"
-    value="{{attributes.description}}"> </div>
+            type="text" name="description" class="form-control"
+            value="{{attributes.description}}"> </div>
 
     <div class="form-group"> <label class="control-label">Annoskoko</label>
-    <input type="number" name="portions" class="form-control"
-    value="{{attributes.portions}}"> </div>
+        <input type="number" name="portions" class="form-control"
+               value="{{attributes.portions}}"> </div>
 
     <div class="form-group"> <label class="control-label">Reseptin lähde *</label>
-    <input type="text" name="source" class="form-control"
-    value="{{attributes.source}}"> </div>
+        <input type="text" name="source" class="form-control"
+               value="{{attributes.source}}"> </div>
 
     <div class="form-group"> <label class="control-label">Ohjeet *</label>
-    <textarea name="instructions" class="form-control"
-    rows="10">{{attributes.instructions}}</textarea> </div>
+        <textarea name="instructions" class="form-control"
+                  rows="10">{{attributes.instructions}}</textarea> </div>
 
     <div class="form-group"> <button type="submit" class="btn
-    btn-primary">Tallenna</button> </div>
+                                     btn-primary">Tallenna</button> </div>
 
-  </form> {% endblock %}
+</form> {% endblock %}

@@ -3,16 +3,17 @@
 class Recipe extends BaseModel {
 
     public $id, $name, $instructions, $source, $portions, $description, $chef_id,
-     $added, $updated;
+            $added, $updated;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
-        $this->validators = array('validate_name','validate_instructions',
-        'validate_source','validate_portions','validate_description');
+        $this->validators = array('validate_name', 'validate_instructions',
+            'validate_source', 'validate_portions', 'validate_description');
     }
 
     public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Recipe ORDER BY name ASC');
+        $query = DB::connection()->prepare(
+                'SELECT * FROM Recipe ORDER BY name ASC');
         $query->execute();
         $rows = $query->fetchAll();
         $recipes = array();
@@ -26,8 +27,8 @@ class Recipe extends BaseModel {
                 'portions' => $row['portions'],
                 'description' => $row['description'],
                 'chef_id' => $row['chef_id'],
-                'added' => $row['added'],
-                'updated' => $row['updated']
+                'added' => date("d.m.Y", strtotime($row['added'])),
+                'updated' => date("d.m.Y", strtotime($row['updated']))
             ));
         }
         return $recipes;
@@ -48,8 +49,8 @@ class Recipe extends BaseModel {
                 'portions' => $row['portions'],
                 'description' => $row['description'],
                 'chef_id' => $row['chef_id'],
-                'added' => $row['added'],
-                'updated' => $row['updated']
+                'added' => date("d.m.Y", strtotime($row['added'])),
+                'updated' => date("d.m.Y", strtotime($row['updated']))
             ));
             return $recipe;
         }
@@ -61,8 +62,8 @@ class Recipe extends BaseModel {
                 'INSERT INTO Recipe ('
                 . 'name, instructions, source, portions, description, chef_id,'
                 . 'added, updated)'
-                . 'VALUES (:name, :instructions, :source, :portions, :description,'
-                . ':chef_id, CURRENT_DATE, CURRENT_DATE)'
+                . 'VALUES (:name, :instructions, :source, :portions,'
+                . ':description, :chef_id, CURRENT_DATE, CURRENT_DATE)'
                 . 'RETURNING id');
         $query->execute(array(
             'name' => $this->name,
@@ -111,11 +112,11 @@ class Recipe extends BaseModel {
             $errors[] = $method . ' ei saa olla tyhjä!';
         }
         if ($required == true && $length < 3) {
-          $errors[] = $method . ' "' . $string .
-          '": pituuden tulee olla vähintään kolme merkkiä!';
+            $errors[] = $method . ' "' . $string .
+                    '": pituuden tulee olla vähintään kolme merkkiä!';
         }
-        if(preg_match("/[^A-Za-z0-9åäöÅÄÖ\!?+\.\-\/ ]/",$string)){
-          $errors[] = 'Kentässä "' . $method . '" on kiellettyjä merkkejä!';
+        if (preg_match("/[^A-Za-z0-9åäöÅÄÖ\!?+\.\-\/ ]/", $string)) {
+            $errors[] = 'Kentässä "' . $method . '" on kiellettyjä merkkejä!';
         }
         return $errors;
     }
@@ -132,7 +133,8 @@ class Recipe extends BaseModel {
         $errors = array();
         $validate_string_length = 'validate_string_length';
         $errors = $this->{$validate_string_length}
-                ('Ohjeet', true, $this->instructions, strlen($this->instructions));
+                ('Ohjeet', true, $this->instructions, strlen(
+                        $this->instructions));
         return $errors;
     }
 
@@ -148,7 +150,8 @@ class Recipe extends BaseModel {
         $errors = array();
         $validate_string_length = 'validate_string_length';
         $errors = $this->{$validate_string_length}
-                ('Kuvaus', false, $this->description, strlen($this->description));
+                ('Kuvaus', false, $this->description, strlen(
+                        $this->description));
         return $errors;
     }
 
