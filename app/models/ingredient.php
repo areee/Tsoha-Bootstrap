@@ -11,9 +11,9 @@ class Ingredient extends BaseModel {
 
     public function save() {
         // $ingredient = $this->find_ingredient();
-        $insert_query = DB::connection()
-            ->prepare("INSERT INTO RecipeFood ("
-            . "recipe_id, food_id, volume, unit) VALUES (:recipe_id, :food_id, :unit)");
+        $query = DB::connection()->prepare(
+            'INSERT INTO RecipeFood ('
+            . 'recipe_id, food_id, volume, unit, added, updated) VALUES (:recipe_id, :food_id, :volume, :unit, CURRENT_DATE, CURRENT_DATE) RETURNING id');
 
         // if (!$ingredient) {
         //     $ingredient = $this->new_ingredient_store();
@@ -21,7 +21,15 @@ class Ingredient extends BaseModel {
 
         // $this->ingredient_id = $ingredient['id'];
 
-        $insert_query->execute(array('recipe_id' => $this->recipe_id, 'food_id' => $this->food_id, 'volume' => $this->volume, 'unit' => $this->unit));
+        $query->execute(array(
+          'recipe_id' => $this->recipe_id,
+          'food_id' => $this->food_id,
+          'volume' => $this->volume,
+          'unit' => $this->unit));
+
+          $row = $query->fetch();
+
+          $this->id = $row['id'];
     }
 
     // validointimetodit:
