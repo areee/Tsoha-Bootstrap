@@ -16,32 +16,25 @@ $(document).ready(function(){
 function newInput(option) {
     var volumeElement = document.createElement("input");
     var unitElement = document.createElement("input");
-    // var foodElement1 = document.createElement("select");
-    // var foodElement2 = document.createElement("option");
     var tableElement = document.createElement("table");
     var tr = document.createElement("tr");
     var td1 = document.createElement("td");
     var td2 = document.createElement("td");
-    var td3 = document.createElement("td");
 
     tableElement.setAttribute("class", 'form-group');
 
     volumeElement.setAttribute("type", 'text');
     unitElement.setAttribute("type", 'text');
-    foodElement1.setAttribute("class",'form-control');
 
     var volumeFieldName = "volume";
     var unitFieldName = "unit";
-    var foodFieldName = "food";
     if (option == 0) {
         volumeFieldName += "New";
         unitFieldName += "New";
-        foodFieldName += "New";
     }
 
     var volumeField = volumeFieldName + "[" + ++indexCountForFood + "]";
     var unitField = unitFieldName + "[" + indexCountForFood + "]";
-    var foodField = foodFieldName + "[" + indexCountForFood + "]";
 
     volumeElement.setAttribute("name", volumeField);
     volumeElement.setAttribute("class", 'form-control');
@@ -51,25 +44,17 @@ function newInput(option) {
     unitElement.setAttribute("class", 'form-control');
     unitElement.setAttribute("placeholder", 'Yksikkö');
 
-    foodElement1.setAttribute("name", foodField);
-
-    foodElement2.setAttribute("value", '{{food.id}}');
-
-    foodElement1.appendChild(foodElement2);
-
     td1.appendChild(volumeElement);
     td2.appendChild(unitElement);
-    td3.appendChild(foodElement1);
 
     tr.appendChild(td1);
     tr.appendChild(td2);
-    tr.appendChild(td3);
     tableElement.appendChild(tr);
 
 
-    var foodElement = document.getElementById("newFood");
+    var volumeElement = document.getElementById("newVolume");
 
-    foodElement.appendChild(tableElement);
+    volumeElement.appendChild(tableElement);
 }
 
 // $(function() {
