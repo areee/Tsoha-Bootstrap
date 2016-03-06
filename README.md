@@ -21,13 +21,13 @@ Sovelluksen ideana on yhdistää ruokareseptejä sisältävä sähköinen keitto
 Järjestelmän tarkoituksena on helpottaa kuluttajaa tämän kotiruoan suunnittelemisessa ja valmistamisessa sekä auttaa pysymään tilanteen tasalla kodin ruokatarpeiden kanssa. Järjestelmän tavoitteena on mahdollistaa se, ettei ylimääräistä aikaa kulu kotona laitettavan ruoan suunnitteluun ja raaka-aineiden haalimiseen.
 
 ## Tunnukset
-- admin-tunnus:
+- ylläpitäjän tunnus:
 	- käyttäjätunnus: areee
 	- salasana: salasana
-- normaalikäyttäjätunnus:
+- normaali käyttäjän tunnus:
 	- käyttäjätunnus: maisku
 	- salasana: en_muista
-- toinen normaalikäyttäjätunnus:
+- toinen normaali käyttäjän tunnus:
 	- käyttäjätunnus: ajajaa
 	- salasana: dabadaa
 
