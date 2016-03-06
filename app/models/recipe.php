@@ -96,6 +96,9 @@ class Recipe extends BaseModel {
     }
 
     public function destroy() {
+        Ingredient::delete_from_recipe($this->id);
+        // Ingredient::delete_unused();
+
         $query = DB::connection()->prepare('DELETE FROM Recipe WHERE id = :id');
         $query->execute(array('id' => $this->id));
     }

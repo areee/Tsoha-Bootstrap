@@ -32,6 +32,13 @@ class Ingredient extends BaseModel {
           $this->id = $row['id'];
     }
 
+    public static function delete_from_recipe($id)
+    {
+        $query = DB::connection()->prepare(
+        'DELETE FROM RecipeFood WHERE recipe_id = :id');
+        $query->execute(array('id' => $id));
+    }
+
     // validointimetodit:
     public function validate_number($method, $number) {
         $errors = array();

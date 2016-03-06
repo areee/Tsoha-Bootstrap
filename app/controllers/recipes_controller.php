@@ -5,7 +5,11 @@ class RecipeController extends BaseController {
     public static function index() {
         self::check_logged_in();
         $recipes = Recipe::all();
-        View::make('recipe/index.html', array('recipes' => $recipes));
+        $chefs = array();
+        foreach ($recipes as $recipe) {
+            $chefs[$recipe->chef_id] = Chef::find($recipe->chef_id);
+        }
+        View::make('recipe/index.html', array('recipes' => $recipes, 'chefs' => $chefs));
     }
 
     public static function show($id) {
@@ -92,8 +96,8 @@ class RecipeController extends BaseController {
             $q = $q . 'New';
         }
         foreach ($params[$i] as $index => $row) { // kaikki kentät, joissa 'volume', käydään yksitellen läpi $row:na
-            // ei huomioida tyhjiä kenttiä
-            if (strlen(trim($row) . '' . trim($params[$q][$index])) > 0) {
+            // jos ei tyhjiä kenttiä
+            // if (strlen(trim($row) . '' . trim($params[$q][$index])) > 0) {
               $food_id = $foods[$index]; // otetaan talteen samassa tahdissa raaka-aineen id:n
 
                 $ingredient = new Ingredient(array(
@@ -103,7 +107,10 @@ class RecipeController extends BaseController {
                 ));
                 $errors = $ingredient->errors();
                 $ingredients[] = $ingredient;
-            }
+            // }else{ // jos on tyhjiä kenttiä
+            //
+            // }
+
         }
         if (count($errors) == 0) {
           // $recipe->save();
@@ -198,7 +205,9 @@ class RecipeController extends BaseController {
     public static function destroy($id) {
         self::check_logged_in();
         self::check_is_admin();
-        $recipe = new Recipe(array('id' => $id));
+
+        // $recipe = new Recipe(array('id' => $id));
+        $recipe = Recipe::find($id);
         $recipe->destroy();
         Redirect::to('/recipe', array('message' => 'Resepti on poistettu onnistuneesti!'));
     }

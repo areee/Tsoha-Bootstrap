@@ -19,7 +19,7 @@
             <!--<th>Valittu</th>-->
             <th>Resepti</th>
             <th>Annoskoko</th>
-            <th>Valmistustilanne</th>
+            <th>Lisääjä</th>
             <th>Muokattu viimeksi</th>
             <th></th>
         </tr>
@@ -31,7 +31,8 @@
             <!--<td><input type="checkbox" value=""></td>--><!--tämä toiminto vielä pahasti kesken-->
             <td><a href="{{base_path}}/recipe/{{recipe.id}}">{{recipe.name}}</a></td>
             <td>{{recipe.portions}}</td>
-            <td><label class="label label-success">onnistuu</label></td> <!--tämä toiminto vielä pahasti kesken-->
+            <td><a href="{{base_path}}/chef/{{recipe.chef_id}}">{{chefs[recipe.chef_id].username}}</a></td>
+            <!-- <td><label class="label label-success">onnistuu</label></td> tämä toiminto vielä pahasti kesken-->
             <td>{{recipe.updated}}</td>
             <td><a class="btn btn-default btn-sm" href="{{base_path}}/recipe/{{recipe.id}}/edit">Muokkaa</a></td>
             <!--tämä toiminto vielä pahasti kesken-->
