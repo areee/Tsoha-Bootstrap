@@ -10,7 +10,7 @@ class Chef extends BaseModel {
     'validate_username_not_in_use'); }
 
     public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Chef');
+        $query = DB::connection()->prepare('SELECT * FROM Chef ORDER BY username ASC');
         $query->execute();
         $rows = $query->fetchAll();
         $chefs = array();

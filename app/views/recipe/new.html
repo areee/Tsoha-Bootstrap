@@ -14,9 +14,63 @@
 
 <form method="post" action="{{base_path}}/recipe/new">
     <div class="form-group">
-        <label class="control-label">Nimi</label>
+        <label class="control-label">Nimi *</label>
         <input type="text" name="name" class="form-control" value="{{attributes.name}}">
     </div>
+
+    <div class="form-group"> <!--form-inline-->
+      <table>
+        <tr>
+          <td>
+            <label>Määrä *</label>
+          </td>
+          <td>
+            <label>Yksikkö *</label>
+            <span class="help-block">kilogrammaa, litraa tai kappaletta</span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" name="volume[0]" class="form-control" placeholder="Määrä">
+          </td>
+          <td>
+            <input type="text" name="unit[0]" class="form-control" placeholder="Yksikkö">
+          </td>
+          <!-- <td> -->
+            <!-- <input type="text" name="food[0]" class="form-control" placeholder="Raaka-aine"> -->
+              <!-- <select class="form-control" name="food[0]">
+                {% for food in foods %}
+                <option value="{{food.id}}">{{food.name}}</option>
+                {% endfor %}
+              </select> -->
+          <!-- </td> -->
+        </tr>
+      </table>
+    </div>
+
+    <script>var indexCountForFood = 0;</script>
+    <span id="newFood"></span>
+    <div class="form-group">
+      <button type="button" onclick="newInput(1)"
+      class="btn btn-success">Lisää raaka-ainetiedot</button>
+    </div>
+
+
+
+    <div class="form-group">
+      <label>Raaka-aineet *</label>
+      <span class="help-block">Vinkki: jos raaka-aine ei ole listassa käy se
+        ensin lisäämässä <a href="{{base_path}}/food/new">Ruokakomeroon</a>!</span>
+        <span class="help-block"> Voit valita useita raaka-aineita pitämällä
+          ctrl- (PC) tai cmd- (Mac) näppäintä pohjassa. </span>
+      <select class="form-control" name="foods[]" multiple="">
+        {% for food in foods %}
+        <option value="{{food.id}}">{{food.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+
 
     <div class="form-group"> <label class="control-label">Kuvaus</label> <input
     type="text" name="description" class="form-control"
@@ -29,47 +83,6 @@
     <div class="form-group"> <label class="control-label">Reseptin lähde</label>
     <input type="text" name="source" class="form-control"
     value="{{attributes.source}}"> </div>
-
-    <div class="form-group"> <!--form-inline-->
-      <table>
-        <tr>
-          <td>
-            <label>Määrä</label>
-          </td>
-          <td>
-            <label>Yksikkö</label>
-          </td>
-          <td>
-            <label>Raaka-aine</label>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <input type="text" name="volume[0]" class="form-control" placeholder="Määrä">
-          </td>
-          <td>
-            <input type="text" name="unit[0]" class="form-control" placeholder="Yksikkö">
-          </td>
-          <td>
-            <!-- <input type="text" name="food[0]" class="form-control" placeholder="Raaka-aine"> -->
-            <div id="food_section">
-              <select class="form-control" name="food[0]">
-                {% for food in foods %}
-                <option value="{{food.id}}">{{food.name}}</option>
-                {% endfor %}
-              </select>
-            </div>
-          </td>
-        </tr>
-      </table>
-    </div>
-    <script>var indexCountForFood = 0;</script>
-    <span id="newFood"></span>
-
-    <div class="form-group">
-      <button type="button" onclick="newInput(1)"
-      class="btn btn-success">Lisää raaka-aine</button>
-    </div>
 
     <div class="form-group"> <label class="control-label">Ohjeet</label>
     <textarea name="instructions" class="form-control"

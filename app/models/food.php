@@ -11,7 +11,7 @@ class Food extends BaseModel {
     }
 
     public static function all() {
-        $query = DB::connection()->prepare('SELECT * FROM Food');
+        $query = DB::connection()->prepare('SELECT * FROM Food ORDER BY name ASC');
         $query->execute();
         $rows = $query->fetchAll();
         $foods = array();

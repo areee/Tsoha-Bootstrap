@@ -16,8 +16,8 @@ $(document).ready(function(){
 function newInput(option) {
     var volumeElement = document.createElement("input");
     var unitElement = document.createElement("input");
-    var foodElement1 = document.createElement("select");
-    var foodElement2 = document.createElement("option");
+    // var foodElement1 = document.createElement("select");
+    // var foodElement2 = document.createElement("option");
     var tableElement = document.createElement("table");
     var tr = document.createElement("tr");
     var td1 = document.createElement("td");
