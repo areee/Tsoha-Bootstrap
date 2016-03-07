@@ -26,7 +26,8 @@ class FoodController extends BaseController {
     public static function store() {
         self::check_logged_in();
         $params = $_POST;
-        $attributes = self::get_attributes($params, null);
+        $chef_id = self::get_user_logged_in();
+        $attributes = self::get_attributes($params, $chef_id, null);
 
         $food = new Food($attributes);
         $errors = $food->errors();
@@ -52,8 +53,8 @@ class FoodController extends BaseController {
     public static function update($id) {
         self::check_logged_in();
         $params = $_POST;
-
-        $attributes = self::get_attributes($params, $id);
+        $chef_id = self::get_user_logged_in();
+        $attributes = self::get_attributes($params, $chef_id, $id);
 
         $food = new Food($attributes);
         $errors = $food->errors();
@@ -80,13 +81,14 @@ class FoodController extends BaseController {
             'message' => 'Raaka-aine on poistettu onnistuneesti!'));
     }
 
-    private static function get_attributes($params, $id) {
+    private static function get_attributes($params, $chef_id, $id) {
         $attributes = array(
             'id' => $id,
             'name' => $params['name'],
             'volume' => $params['volume'],
             'description' => $params['description'],
-            'unit' => $params['unit']
+            'unit' => $params['unit'],
+            'chef_id' => $chef_id->id
         );
         return $attributes;
     }
